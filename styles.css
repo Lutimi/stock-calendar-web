@@ -1,18 +1,18 @@
 :root {
-  --bg: #f3f1e8;
-  --bg-soft: #ebe7dc;
-  --surface: #fffdf6;
-  --surface-2: #f8f5ea;
-  --line: #d8d1c1;
-  --text: #171b1f;
-  --muted: #59626c;
-  --faint: #7b8490;
-  --green: #12845f;
-  --cyan: #2367c8;
-  --amber: #bc7a19;
-  --red: #c13d3d;
-  --violet: #6e54c8;
-  --shadow: 0 18px 48px rgba(42, 38, 25, 0.12);
+  --bg: #090b10;
+  --bg-soft: #111621;
+  --surface: #151b26;
+  --surface-2: #1b2330;
+  --line: #2a3445;
+  --text: #f5f7fb;
+  --muted: #aab4c3;
+  --faint: #748094;
+  --green: #33d6a6;
+  --cyan: #62b6ff;
+  --amber: #f0b84f;
+  --red: #ff6f7d;
+  --violet: #b69cff;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
 }
 
 * {
@@ -20,16 +20,16 @@
 }
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(18, 132, 95, 0.12), transparent 240px),
-    linear-gradient(90deg, rgba(35, 103, 200, 0.08), transparent 48%),
-    repeating-linear-gradient(90deg, rgba(23, 27, 31, 0.035) 0 1px, transparent 1px 96px),
+    linear-gradient(180deg, rgba(98, 182, 255, 0.12), transparent 280px),
+    linear-gradient(120deg, rgba(51, 214, 166, 0.08), transparent 42%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 96px),
     var(--bg);
   color: var(--text);
   font-family: "Instrument Sans", sans-serif;
@@ -86,7 +86,7 @@ h1 {
   padding: 0 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 253, 246, 0.86);
+  background: rgba(21, 27, 38, 0.86);
   color: var(--muted);
   font-size: 0.9rem;
 }
@@ -127,7 +127,7 @@ h1 {
 .stat,
 .event-card {
   border: 1px solid var(--line);
-  background: rgba(255, 253, 246, 0.92);
+  background: rgba(21, 27, 38, 0.9);
   box-shadow: var(--shadow);
 }
 
@@ -138,8 +138,8 @@ h1 {
 
 .summary {
   background:
-    linear-gradient(135deg, rgba(18, 132, 95, 0.16), transparent 48%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent),
+    linear-gradient(135deg, rgba(51, 214, 166, 0.14), transparent 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
     var(--surface);
 }
 
@@ -159,7 +159,7 @@ h1 {
   margin-top: 14px;
   padding: 8px 10px;
   border-radius: 6px;
-  background: rgba(18, 132, 95, 0.1);
+  background: rgba(51, 214, 166, 0.12);
   color: var(--green);
   font-weight: 800;
 }
@@ -323,7 +323,7 @@ h1 {
   border-radius: 8px;
   padding: 12px;
   background:
-    linear-gradient(90deg, rgba(18, 132, 95, 0.045), transparent),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent),
     var(--surface);
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -332,7 +332,7 @@ h1 {
   transform: translateY(-2px);
   border-color: #465169;
   background:
-    linear-gradient(90deg, rgba(35, 103, 200, 0.075), transparent),
+    linear-gradient(90deg, rgba(98, 182, 255, 0.08), transparent),
     var(--surface-2);
 }
 
@@ -389,45 +389,45 @@ h1 {
 }
 
 .decision-chip.buy {
-  color: #f6fff9;
+  color: #061c15;
   background: var(--green);
 }
 
 .decision-chip.wait {
-  color: #fff8e8;
+  color: #221603;
   background: var(--amber);
 }
 
 .decision-chip.avoid {
-  color: #fff4f4;
+  color: #2a060b;
   background: var(--red);
 }
 
 .badge.impact.high,
 .badge.risk.alto {
-  color: #8a1f1f;
-  background: rgba(193, 61, 61, 0.1);
-  border-color: rgba(193, 61, 61, 0.22);
+  color: #ffd2d7;
+  background: rgba(255, 111, 125, 0.12);
+  border-color: rgba(255, 111, 125, 0.28);
 }
 
 .badge.impact.medium,
 .badge.risk.medio {
-  color: #814f08;
-  background: rgba(188, 122, 25, 0.1);
-  border-color: rgba(188, 122, 25, 0.22);
+  color: #ffe1a5;
+  background: rgba(240, 184, 79, 0.12);
+  border-color: rgba(240, 184, 79, 0.28);
 }
 
 .badge.impact.low,
 .badge.risk.bajo {
-  color: #0f6249;
-  background: rgba(18, 132, 95, 0.1);
-  border-color: rgba(18, 132, 95, 0.22);
+  color: #bcffe8;
+  background: rgba(51, 214, 166, 0.12);
+  border-color: rgba(51, 214, 166, 0.28);
 }
 
 .badge.type {
-  color: #433094;
-  background: rgba(110, 84, 200, 0.1);
-  border-color: rgba(110, 84, 200, 0.2);
+  color: #e3d9ff;
+  background: rgba(182, 156, 255, 0.12);
+  border-color: rgba(182, 156, 255, 0.24);
 }
 
 .title {
@@ -456,7 +456,7 @@ h1 {
 }
 
 .note {
-  color: #343b43;
+  color: #d7dee9;
   line-height: 1.45;
   margin-top: 8px;
 }
@@ -484,7 +484,7 @@ h1 {
 
 .why-box {
   border-left: 3px solid var(--green);
-  background: rgba(18, 132, 95, 0.07);
+  background: rgba(51, 214, 166, 0.08);
   border-radius: 7px;
   margin-top: 12px;
   padding: 10px 11px;
@@ -500,7 +500,7 @@ h1 {
 }
 
 .why-box p {
-  color: #283037;
+  color: #dbe4ef;
   line-height: 1.42;
 }
 
@@ -530,7 +530,7 @@ h1 {
 .reason {
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.48);
+  background: rgba(255, 255, 255, 0.035);
   color: var(--muted);
   padding: 6px 8px;
   font-size: 0.78rem;
