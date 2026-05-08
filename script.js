@@ -10,6 +10,11 @@ const events = [
     note: "Suele aumentar ruido intradia y rotaciones de corto plazo en indices y mega caps.",
     source: "Calendario de mercado (no estoy seguro de hora exacta)",
     thesis: "OPEX puede distorsionar flujos y causar movimientos falsos. Sirve mas para gestionar entradas ya planeadas que para abrir una compra nueva.",
+    prediction: {
+      label: "Neutral",
+      tone: "neutral",
+      text: "No es un catalizador de compra por si solo. Puede crear ruido de precio, asi que conviene usarlo para esperar mejor entrada.",
+    },
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 0,
@@ -30,6 +35,11 @@ const events = [
     source: "Manual confirmado",
     sourceUrl: "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/",
     thesis: "NVIDIA sigue siendo el termometro principal de AI. Su ultimo reporte mostro crecimiento fuerte de data center y el mercado suele usar su guidance para valorar todo el bloque de chips.",
+    prediction: {
+      label: "Favorable si guidance confirma AI",
+      tone: "positive",
+      text: "El evento puede salir bien si ventas de data center y guidance superan expectativas. Si el mercado ya llego muy euforico, tambien puede vender la noticia.",
+    },
     strategy: {
       focus: ["NVDA", "AVGO", "QQQ"],
       buyDaysBefore: 2,
@@ -50,6 +60,11 @@ const events = [
     source: "Regla tactica",
     sourceUrl: "https://investor.nvidia.com/financial-info/financial-reports",
     thesis: "El dia posterior a NVDA suele dar una lectura mas limpia: si la reaccion confirma guidance fuerte, puede arrastrar semiconductores y QQQ.",
+    prediction: {
+      label: "Favorable si abre y sostiene verde",
+      tone: "positive",
+      text: "La probabilidad mejora si NVDA, QQQ y semiconductores sostienen fuerza la primera hora. Si se revierte rapido, mejor esperar.",
+    },
     strategy: {
       focus: ["NVDA", "SMH", "QQQ"],
       buyDaysBefore: 0,
@@ -70,6 +85,11 @@ const events = [
     source: "Manual confirmado",
     sourceUrl: "https://investors.broadcom.com/company-information/events-presentations",
     thesis: "Broadcom es una jugada de infraestructura AI distinta a NVDA. Su proximo earnings del 3 de junio puede validar demanda en networking, custom silicon y AI infrastructure.",
+    prediction: {
+      label: "Favorable con AI revenue fuerte",
+      tone: "positive",
+      text: "Puede ser positivo si AI revenue y guidance salen fuertes. Es delicado si el mercado cuestiona VMware, margenes o crecimiento futuro.",
+    },
     strategy: {
       focus: ["AVGO", "NVDA", "QQQ"],
       buyDaysBefore: 2,
@@ -803,12 +823,22 @@ function renderMacroEvents() {
   macroGrid.innerHTML = "";
   macroEvents.forEach((event) => {
     const node = macroTemplate.content.cloneNode(true);
+    const pseudoEvent = {
+      title: event.code === "NFP" ? "Non-Farm Payrolls" : event.title,
+      type: "macro",
+      impact: "high",
+      strategy: { riskLevel: "alto", gainRangePct: "-2% a +2%", buyDaysBefore: 1 },
+    };
+    const prediction = buildPrediction(pseudoEvent, { score: 58 });
     node.querySelector(".macro-code").textContent = event.code;
     node.querySelector(".macro-title").textContent = event.title;
     node.querySelector(".macro-date").textContent = event.date;
     node.querySelector(".macro-time").textContent = event.time;
     node.querySelector(".macro-time-pe").textContent = event.peruTime;
     node.querySelector(".macro-explain").textContent = event.explain;
+    node.querySelector(".macro-prediction-label").textContent = prediction.label;
+    node.querySelector(".macro-prediction-label").classList.add(prediction.tone);
+    node.querySelector(".macro-prediction-text").textContent = `${prediction.text} Warning: es netamente referencial.`;
 
     const impact = node.querySelector(".macro-impact");
     event.impact.forEach((item) => {
@@ -894,6 +924,64 @@ function buildDecision(event) {
   return { action, score, reasons, profile: profile.label };
 }
 
+function buildPrediction(event, decision) {
+  if (event.prediction) return event.prediction;
+
+  if (event.title.includes("CPI")) {
+    return {
+      label: "Delicado hasta ver el dato",
+      tone: "caution",
+      text: "Para bolsa, suele ser bueno si la inflacion sale menor a lo esperado. Si sale caliente, puede golpear QQQ y tech. Lectura netamente referencial.",
+    };
+  }
+
+  if (event.title.includes("PPI")) {
+    return {
+      label: "Neutral a delicado",
+      tone: "neutral",
+      text: "PPI confirma presion de costos. Solo se vuelve muy importante si sorprende fuerte. Lectura referencial, no senal de compra directa.",
+    };
+  }
+
+  if (event.title.includes("Non-Farm")) {
+    return {
+      label: "Depende de empleo y salarios",
+      tone: "caution",
+      text: "Puede ser favorable si muestra enfriamiento ordenado. Si empleo/salarios salen muy fuertes, el mercado puede temer tasas altas por mas tiempo.",
+    };
+  }
+
+  if (event.title.includes("FOMC")) {
+    return {
+      label: "Delicado hasta Powell",
+      tone: "caution",
+      text: "Puede salir bien para growth si la Fed suena flexible. Si suena dura con tasas, QQQ y mega caps pueden caer. Esperar conferencia reduce ruido.",
+    };
+  }
+
+  if (decision.score >= 76) {
+    return {
+      label: "Favorable",
+      tone: "positive",
+      text: "El setup combina cercania, catalizador y posible movimiento. Sigue siendo referencial; valida precio y reaccion antes de entrar fuerte.",
+    };
+  }
+
+  if (decision.score >= 58) {
+    return {
+      label: "Neutral",
+      tone: "neutral",
+      text: "Hay catalizador, pero no suficiente claridad. Puede servir para mirar, no necesariamente para comprar antes del evento.",
+    };
+  }
+
+  return {
+    label: "Delicado",
+    tone: "caution",
+    text: "La relacion oportunidad/ruido no se ve clara. Mejor esperar reaccion del mercado antes de usar capital.",
+  };
+}
+
 function probabilityLabel(score) {
   if (score >= 78) return "Alta";
   if (score >= 62) return "Media";
@@ -969,6 +1057,7 @@ function createEventCard(item) {
       play: "Sin pauta tactica cargada.",
     };
     const decision = buildDecision(item);
+    const prediction = buildPrediction(item, decision);
 
     const risk = node.querySelector(".badge.risk");
     risk.textContent = `riesgo: ${strategy.riskLevel}`;
@@ -978,12 +1067,17 @@ function createEventCard(item) {
     decisionChip.textContent = decision.action === "buy" ? "considerar compra" : decision.action === "wait" ? "esperar" : "evitar";
     decisionChip.classList.add(decision.action);
 
+    const predictionChip = node.querySelector(".prediction-chip");
+    predictionChip.textContent = prediction.label;
+    predictionChip.classList.add(prediction.tone);
+
     node.querySelector(".score").textContent = `${decision.score}/100`;
     node.querySelector(".probability").textContent = probabilityLabel(decision.score);
     node.querySelector(".focus").textContent = strategy.focus.join(", ") || "N/A";
     node.querySelector(".entry").textContent = `${strategy.buyDaysBefore} dia(s) antes`;
     node.querySelector(".range").textContent = strategy.gainRangePct;
     node.querySelector(".why").textContent = item.thesis || "Catalizador pendiente de validar con fuente.";
+    node.querySelector(".prediction-text").textContent = `${prediction.text} Warning: es netamente referencial.`;
     node.querySelector(".plan").textContent = strategy.play;
 
     const reasonList = node.querySelector(".reason-list");
