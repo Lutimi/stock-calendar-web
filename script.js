@@ -87,7 +87,8 @@ const events = [
     meta: "Dato macro",
     explain: "Es el dato mensual de empleo en EE.UU. Si sale muy fuerte o muy debil, cambia las expectativas sobre tasas de interes.",
     note: "Puede mover tasas implicitas y compresion/expansion de multiplos en tech.",
-    source: "Calendario macro estimado mensual",
+    source: "BLS Employment Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/empsit.htm",
     thesis: "Empleo fuerte o debil cambia la expectativa de tasas. Eso afecta multiples de growth, especialmente QQQ y mega caps.",
     strategy: {
       focus: ["SPY", "QQQ", "MSFT"],
@@ -98,15 +99,56 @@ const events = [
     },
   },
   {
-    date: "2026-06-12",
+    date: "2026-06-10",
     month: "2026-06",
     type: "macro",
     impact: "high",
-    title: "CPI Estados Unidos (estimado mensual)",
+    title: "CPI Estados Unidos",
+    meta: "Dato macro",
+    explain: "CPI mide inflacion al consumidor. Es uno de los datos que mas mueve tech porque cambia expectativas de tasas.",
+    note: "Inflacion de mayo. Puede mover QQQ, MSFT, GOOGL y SPY antes de la apertura.",
+    source: "BLS CPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
+    thesis: "Si CPI sale mas bajo de lo esperado, suele favorecer growth. Si sale caliente, puede comprimir multiplos.",
+    strategy: {
+      focus: ["QQQ", "MSFT", "GOOGL"],
+      buyDaysBefore: 1,
+      gainRangePct: "-2% a +2.5%",
+      riskLevel: "alto",
+      play: "Con 150 USD: maximo 50 USD antes del CPI. Usa 100 USD despues del dato solo si QQQ confirma fuerza.",
+    },
+  },
+  {
+    date: "2026-06-11",
+    month: "2026-06",
+    type: "macro",
+    impact: "medium",
+    title: "PPI Estados Unidos",
+    meta: "Dato macro",
+    explain: "PPI mide inflacion al productor. Ayuda a ver si los costos empresariales siguen presionando.",
+    note: "Dato complementario a CPI. Menos potente, pero puede confirmar o enfriar la lectura de inflacion.",
+    source: "BLS PPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    thesis: "PPI importa si cambia la lectura sobre margenes y tasas. Es mas de confirmacion que de apuesta principal.",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "-1% a +1.2%",
+      riskLevel: "medio",
+      play: "Con 150 USD: no compres por PPI solo. Si el mercado reacciona bien, prueba 50-75 USD y guarda el resto.",
+    },
+  },
+  {
+    date: "2026-05-12",
+    month: "2026-05",
+    type: "macro",
+    impact: "high",
+    title: "CPI Estados Unidos",
     meta: "Dato macro",
     explain: "CPI mide inflacion al consumidor. Si la inflacion baja, suele ayudar a acciones de crecimiento; si sube, puede presionar al mercado.",
     note: "Inflacion impacta tasas y multiplos de growth. Suele mover MSFT, GOOGL, AMZN, META y QQQ.",
-    source: "Fecha estimada, validar calendario oficial",
+    source: "BLS CPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
     thesis: "CPI es uno de los datos que mas mueve acciones growth. Una inflacion mas baja suele ayudar a QQQ; una sorpresa alta puede comprimir multiplos.",
     strategy: {
       focus: ["QQQ", "MSFT", "GOOGL"],
@@ -117,15 +159,16 @@ const events = [
     },
   },
   {
-    date: "2026-06-15",
-    month: "2026-06",
+    date: "2026-05-13",
+    month: "2026-05",
     type: "macro",
     impact: "medium",
-    title: "PPI Estados Unidos (estimado mensual)",
+    title: "PPI Estados Unidos",
     meta: "Dato macro",
     explain: "PPI mide inflacion para productores. Es menos famoso que CPI, pero ayuda a entender si los costos siguen subiendo.",
     note: "Complementa lectura de inflacion y puede cambiar expectativas de politica monetaria.",
-    source: "Fecha estimada, validar calendario oficial",
+    source: "BLS PPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
     thesis: "PPI complementa CPI. No suele ser el catalizador principal, pero puede confirmar o enfriar la lectura de inflacion.",
     strategy: {
       focus: ["SPY", "QQQ"],
@@ -142,7 +185,7 @@ const events = [
     impact: "high",
     title: "FOMC / Decision de la Fed",
     meta: "Dato macro",
-    explain: "La Fed decide tasas y comunica su postura. Aunque no cambie la tasa, el tono del comunicado puede mover mucho a SPY, QQQ y tecnológicas.",
+    explain: "La Fed decide tasas y comunica su postura. Aunque no cambie la tasa, el tono del comunicado puede mover mucho a SPY, QQQ y tecnologicas.",
     note: "Decision FOMC oficial. Reunion de dos dias, 16-17 de junio; statement 2:00 p.m. y conferencia 2:30 p.m. ET.",
     source: "Federal Reserve Calendar oficial",
     sourceUrl: "https://www.federalreserve.gov/newsevents/2026-june.htm",
@@ -175,7 +218,7 @@ const events = [
     },
   },
   {
-    date: "2026-07-03",
+    date: "2026-07-02",
     month: "2026-07",
     type: "macro",
     impact: "high",
@@ -183,7 +226,8 @@ const events = [
     meta: "Dato macro",
     explain: "Reporte mensual de empleo. Es importante porque el mercado lo usa para estimar si la Fed tendra margen para bajar tasas.",
     note: "Clave para sensibilidad de growth y direccion de indices antes de temporada de earnings.",
-    source: "Calendario macro estimado mensual",
+    source: "BLS Employment Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/empsit.htm",
     thesis: "Dato de empleo antes de earnings de mega caps: puede definir si el mercado llega con apetito de riesgo o en modo defensivo.",
     strategy: {
       focus: ["QQQ", "MSFT", "AMZN"],
@@ -194,15 +238,16 @@ const events = [
     },
   },
   {
-    date: "2026-07-15",
+    date: "2026-07-14",
     month: "2026-07",
     type: "macro",
     impact: "high",
-    title: "CPI Estados Unidos (estimado mensual)",
+    title: "CPI Estados Unidos",
     meta: "Dato macro",
     explain: "Dato clave de inflacion. Puede cambiar el humor del mercado entero en minutos, especialmente en acciones tech.",
     note: "Dia critico para valuation de tecnologicas y expectativas de recortes/subidas.",
-    source: "Fecha estimada, validar calendario oficial",
+    source: "BLS CPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
     thesis: "CPI cerca de temporada de resultados puede amplificar movimientos: buena inflacion + buen guidance suele ser combo favorable.",
     strategy: {
       focus: ["QQQ", "GOOGL", "META"],
@@ -210,6 +255,26 @@ const events = [
       gainRangePct: "-2% a +2.5%",
       riskLevel: "alto",
       play: "Con 150 USD: usa 50 USD antes si estas convencido. Compra 100 USD despues del CPI solo si el mercado rompe al alza con fuerza.",
+    },
+  },
+  {
+    date: "2026-07-15",
+    month: "2026-07",
+    type: "macro",
+    impact: "medium",
+    title: "PPI Estados Unidos",
+    meta: "Dato macro",
+    explain: "PPI mide inflacion al productor. Puede afectar expectativas de margenes y tasas.",
+    note: "Dato de junio. Sirve para confirmar si la inflacion sigue presionando despues del CPI.",
+    source: "BLS PPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    thesis: "Si PPI tambien sale caliente, el mercado puede dudar de recortes. Si sale suave, ayuda a sostener growth.",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "-1% a +1.2%",
+      riskLevel: "medio",
+      play: "Con 150 USD: usalo para confirmar. Si QQQ sigue fuerte despues del dato, compra 50-75 USD y deja caja.",
     },
   },
   {
@@ -355,7 +420,8 @@ const events = [
     meta: "Dato macro",
     explain: "Dato de empleo mensual. Puede cambiar expectativas de tasas y apetito por acciones de crecimiento.",
     note: "Marca el tono de riesgo del mes para indices y tecnologicas.",
-    source: "Calendario macro estimado mensual",
+    source: "BLS Employment Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/empsit.htm",
     thesis: "Empleo marca el tono de agosto. Si el dato reduce miedo a tasas, puede favorecer compra en indices growth.",
     strategy: {
       focus: ["SPY", "QQQ"],
@@ -370,11 +436,12 @@ const events = [
     month: "2026-08",
     type: "macro",
     impact: "high",
-    title: "CPI Estados Unidos (estimado mensual)",
+    title: "CPI Estados Unidos",
     meta: "Dato macro",
     explain: "Inflacion al consumidor. Si sorprende al alza, puede afectar QQQ; si sorprende a la baja, puede apoyar growth.",
     note: "Evento clave para decidir si mantener momentum growth o rotar a defensivos.",
-    source: "Fecha estimada, validar calendario oficial",
+    source: "BLS CPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
     thesis: "CPI de agosto puede reforzar o romper el momentum de growth tras earnings. Es evento clave para decidir si mantener o tomar ganancias.",
     strategy: {
       focus: ["QQQ", "MSFT", "META"],
@@ -382,6 +449,26 @@ const events = [
       gainRangePct: "-2% a +2.5%",
       riskLevel: "alto",
       play: "Con 150 USD: usa 50 USD antes como maximo. Compra 100 USD despues solo si CPI favorece tasas y QQQ confirma.",
+    },
+  },
+  {
+    date: "2026-08-13",
+    month: "2026-08",
+    type: "macro",
+    impact: "medium",
+    title: "PPI Estados Unidos",
+    meta: "Dato macro",
+    explain: "PPI mide precios recibidos por productores. Ayuda a leer si hay presion de costos para empresas.",
+    note: "Dato de julio. Complementa CPI y puede mover expectativas de tasas si sorprende.",
+    source: "BLS PPI Schedule oficial",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    thesis: "PPI no suele mandar mas que CPI, pero puede confirmar una semana inflacionaria favorable o negativa.",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "-1% a +1.2%",
+      riskLevel: "medio",
+      play: "Con 150 USD: si CPI fue bueno y PPI confirma, puedes sumar 75 USD a QQQ/SPY y guardar 75 USD.",
     },
   },
   {
@@ -486,6 +573,126 @@ const earningsStocks = [
   },
 ];
 
+const macroEvents = [
+  {
+    code: "CPI",
+    title: "Inflacion al consumidor",
+    date: "May 12, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
+    explain: "CPI mide precios pagados por consumidores. Es uno de los datos que mas mueve tasas, bonos, QQQ y acciones growth.",
+    impact: ["CPI menor a esperado suele ayudar QQQ", "CPI caliente puede tumbar tech", "Esperar 30-60 min evita comprar el primer latigazo"],
+  },
+  {
+    code: "PPI",
+    title: "Inflacion al productor",
+    date: "May 13, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    explain: "PPI mide precios recibidos por productores. Sirve como senal de presion de costos antes de que llegue al consumidor.",
+    impact: ["Menos importante que CPI", "Puede confirmar presion inflacionaria", "Mueve mercado si sorprende mucho"],
+  },
+  {
+    code: "NFP",
+    title: "Employment Situation",
+    date: "Jun 5, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/empsit.htm",
+    explain: "Reporte mensual de empleo. El mercado mira payrolls, desempleo y salarios para estimar que hara la Fed.",
+    impact: ["Empleo muy fuerte puede presionar tasas", "Empleo debil puede ayudar expectativa de recortes", "SPY/QQQ suelen moverse rapido"],
+  },
+  {
+    code: "FOMC",
+    title: "Decision de la Fed",
+    date: "Jun 17, 2026",
+    time: "2:00 PM ET statement, 2:30 PM ET press conference",
+    sourceUrl: "https://www.federalreserve.gov/newsevents/2026-june.htm",
+    explain: "La Fed decide tasas y comunica su postura. A veces el comunicado importa menos que lo que diga Powell en conferencia.",
+    impact: ["Tono flexible favorece growth", "Tono duro golpea QQQ", "Mejor decidir despues de la conferencia"],
+  },
+  {
+    code: "CPI",
+    title: "Inflacion al consumidor",
+    date: "Jun 10, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
+    explain: "Nueva lectura mensual de inflacion. Es clave para saber si el mercado puede sostener multiples altos en tech.",
+    impact: ["Dato bajo ayuda MSFT/GOOGL/QQQ", "Dato alto sube miedo a tasas", "No conviene entrar todo antes del dato"],
+  },
+  {
+    code: "PPI",
+    title: "Inflacion al productor",
+    date: "Jun 11, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    explain: "Mide presion de precios a nivel productor. Ayuda a confirmar si CPI fue ruido o tendencia.",
+    impact: ["Complementa CPI", "Mayor impacto si sale muy diferente a esperado", "Usarlo para ajustar posicion, no para all-in"],
+  },
+  {
+    code: "NFP",
+    title: "Employment Situation",
+    date: "Jul 2, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/empsit.htm",
+    explain: "Dato de empleo de junio. Sale antes de temporada fuerte de earnings y puede cambiar el apetito por riesgo.",
+    impact: ["Clave para tasas", "Puede mover futuros antes de apertura", "Esperar reaccion inicial suele ser mejor"],
+  },
+  {
+    code: "CPI",
+    title: "Inflacion al consumidor",
+    date: "Jul 14, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
+    explain: "Inflacion de junio. Muy importante porque llega cerca de earnings de mega caps.",
+    impact: ["CPI bajo + buenos earnings = setup favorable", "CPI alto puede arruinar buenos reportes", "QQQ reacciona fuerte"],
+  },
+  {
+    code: "PPI",
+    title: "Inflacion al productor",
+    date: "Jul 15, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    explain: "PPI de junio. Sirve para ver si empresas estan absorbiendo costos o trasladandolos.",
+    impact: ["Importa para margenes", "Puede afectar sectores industriales", "Menos binario que CPI"],
+  },
+  {
+    code: "FOMC",
+    title: "Decision de la Fed",
+    date: "Jul 29, 2026",
+    time: "2:00 PM ET statement, 2:30 PM ET press conference",
+    sourceUrl: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+    explain: "Decision de politica monetaria. Puede redefinir si el mercado compra growth o se pone defensivo.",
+    impact: ["Tasas esperadas mandan", "Impacta SPY/QQQ/MSFT/GOOGL", "Esperar conferencia antes de comprar fuerte"],
+  },
+  {
+    code: "NFP",
+    title: "Employment Situation",
+    date: "Aug 7, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/empsit.htm",
+    explain: "Reporte de empleo de julio. Puede cambiar el tono del mercado despues de earnings.",
+    impact: ["Dato equilibrado suele ayudar", "Salarios calientes pueden subir tasas", "No perseguir gaps de apertura"],
+  },
+  {
+    code: "CPI",
+    title: "Inflacion al consumidor",
+    date: "Aug 12, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/cpi.htm",
+    explain: "Inflacion de julio. Puede confirmar o romper el momentum posterior a earnings.",
+    impact: ["Dato bajo favorece QQQ", "Dato alto pesa en growth", "Evento de alta volatilidad"],
+  },
+  {
+    code: "PPI",
+    title: "Inflacion al productor",
+    date: "Aug 13, 2026",
+    time: "8:30 AM ET",
+    sourceUrl: "https://www.bls.gov/schedule/news_release/ppi.htm",
+    explain: "PPI de julio. Ayuda a leer presiones de costos y margenes empresariales.",
+    impact: ["Complementa CPI", "Relevante para margenes", "Confirmacion mas que gatillo principal"],
+  },
+];
+
 const profileRules = {
   conservative: {
     label: "Conservador",
@@ -531,6 +738,8 @@ const viewPanels = document.querySelectorAll(".view-panel");
 const eventTemplate = document.getElementById("eventTemplate");
 const earningsTemplate = document.getElementById("earningsTemplate");
 const earningsGrid = document.getElementById("earningsGrid");
+const macroTemplate = document.getElementById("macroTemplate");
+const macroGrid = document.getElementById("macroGrid");
 const watchlistChips = document.getElementById("watchlistChips");
 
 function fillMonthFilter() {
@@ -574,6 +783,29 @@ function renderEarningsStocks() {
     const source = node.querySelector(".earnings-source");
     source.href = stock.sourceUrl;
     earningsGrid.appendChild(node);
+  });
+}
+
+function renderMacroEvents() {
+  macroGrid.innerHTML = "";
+  macroEvents.forEach((event) => {
+    const node = macroTemplate.content.cloneNode(true);
+    node.querySelector(".macro-code").textContent = event.code;
+    node.querySelector(".macro-title").textContent = event.title;
+    node.querySelector(".macro-date").textContent = event.date;
+    node.querySelector(".macro-time").textContent = event.time;
+    node.querySelector(".macro-explain").textContent = event.explain;
+
+    const impact = node.querySelector(".macro-impact");
+    event.impact.forEach((item) => {
+      const pill = document.createElement("span");
+      pill.textContent = item;
+      impact.appendChild(pill);
+    });
+
+    const source = node.querySelector(".macro-source");
+    source.href = event.sourceUrl;
+    macroGrid.appendChild(node);
   });
 }
 
@@ -793,4 +1025,5 @@ tabButtons.forEach((button) => {
 fillMonthFilter();
 fillWatchlist();
 renderEarningsStocks();
+renderMacroEvents();
 render();

@@ -28,6 +28,7 @@
       <nav class="view-tabs" aria-label="Vistas">
         <button class="tab-button active" type="button" data-view="decisions">Decisiones</button>
         <button class="tab-button" type="button" data-view="earnings">Earnings</button>
+        <button class="tab-button" type="button" data-view="macro">Macro</button>
         <button class="tab-button" type="button" data-view="calendar">Calendario</button>
       </nav>
 
@@ -129,6 +130,16 @@
             <div id="earningsGrid" class="earnings-grid"></div>
           </section>
 
+          <section class="surface timeline-panel view-panel" data-panel="macro" hidden>
+            <div class="timeline-head">
+              <div>
+                <span class="kicker">Macro oficial</span>
+                <h2>Inflacion, empleo y Fed</h2>
+              </div>
+            </div>
+            <div id="macroGrid" class="macro-grid"></div>
+          </section>
+
           <section class="surface timeline-panel view-panel" data-panel="decisions">
             <div class="timeline-head">
               <div>
@@ -226,6 +237,20 @@
         <div class="watch-points"></div>
         <p class="earnings-read"></p>
         <a class="earnings-source" target="_blank" rel="noreferrer">Fuente</a>
+      </article>
+    </template>
+
+    <template id="macroTemplate">
+      <article class="macro-card">
+        <div class="macro-head">
+          <span class="macro-code"></span>
+          <span class="macro-date"></span>
+        </div>
+        <h3 class="macro-title"></h3>
+        <p class="macro-time"></p>
+        <p class="macro-explain"></p>
+        <div class="macro-impact"></div>
+        <a class="macro-source" target="_blank" rel="noreferrer">Fuente oficial</a>
       </article>
     </template>
 

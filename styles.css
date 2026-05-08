@@ -358,7 +358,14 @@ h1 {
   gap: 10px;
 }
 
-.earnings-card {
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.earnings-card,
+.macro-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
@@ -367,7 +374,8 @@ h1 {
   padding: 14px;
 }
 
-.earnings-head {
+.earnings-head,
+.macro-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -375,7 +383,8 @@ h1 {
   margin-bottom: 10px;
 }
 
-.ticker {
+.ticker,
+.macro-code {
   display: inline-flex;
   align-items: center;
   min-height: 25px;
@@ -385,6 +394,11 @@ h1 {
   font-size: 0.76rem;
   font-weight: 900;
   padding: 0 9px;
+}
+
+.macro-code {
+  background: var(--cyan);
+  color: #06111c;
 }
 
 .company {
@@ -419,21 +433,35 @@ h1 {
   font-weight: 900;
 }
 
+.macro-date {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.macro-time {
+  color: var(--cyan);
+  font-weight: 900;
+  margin-top: 8px;
+}
+
 .earnings-explain,
-.earnings-read {
+.earnings-read,
+.macro-explain {
   color: #d7dee9;
   line-height: 1.43;
   margin-top: 9px;
 }
 
-.watch-points {
+.watch-points,
+.macro-impact {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
   margin-top: 10px;
 }
 
-.watch-points span {
+.watch-points span,
+.macro-impact span {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
@@ -441,7 +469,8 @@ h1 {
   padding: 6px 8px;
 }
 
-.earnings-source {
+.earnings-source,
+.macro-source {
   display: inline-flex;
   margin-top: 10px;
   color: var(--green);
@@ -450,7 +479,8 @@ h1 {
   text-decoration: none;
 }
 
-.earnings-source:hover {
+.earnings-source:hover,
+.macro-source:hover {
   text-decoration: underline;
 }
 
@@ -730,7 +760,7 @@ details[open] summary {
 
   .view-tabs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     width: 100%;
   }
 
@@ -747,6 +777,10 @@ details[open] summary {
   }
 
   .earnings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .macro-grid {
     grid-template-columns: 1fr;
   }
 
