@@ -7,76 +7,138 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
     <main class="app">
-      <header class="hero">
-        <p class="eyebrow">Stock Calendar</p>
-        <h1>Fechas importantes para invertir con mas criterio</h1>
-        <p class="sub">
-          Enfocado en eventos que suelen mover precio: utilidades, guidance y datos macro.
-          No garantiza rentabilidad; sirve para planificar entradas con menos impulso.
-        </p>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Stock Calendar</p>
+          <h1>Radar de eventos</h1>
+        </div>
+        <div class="market-pill">
+          <span class="pulse"></span>
+          <span>Plan tactico</span>
+        </div>
       </header>
 
-      <section class="panel controls">
-        <div class="control">
-          <label for="monthFilter">Mes</label>
-          <select id="monthFilter">
-            <option value="all">Todos</option>
-          </select>
-        </div>
-        <div class="control">
-          <label for="typeFilter">Tipo</label>
-          <select id="typeFilter">
-            <option value="all">Todos</option>
-            <option value="earnings">Earnings</option>
-            <option value="macro">Macro</option>
-            <option value="watch">Watchlist</option>
-          </select>
-        </div>
-        <div class="control">
-          <label for="impactFilter">Impacto</label>
-          <select id="impactFilter">
-            <option value="all">Todos</option>
-            <option value="high">Alto</option>
-            <option value="medium">Medio</option>
-            <option value="low">Bajo</option>
-          </select>
-        </div>
+      <section class="dashboard">
+        <aside class="sidebar">
+          <section class="surface summary">
+            <span class="kicker">Siguiente evento</span>
+            <h2 id="nextTitle">Cargando...</h2>
+            <p id="nextMeta"></p>
+            <div class="countdown" id="nextCountdown"></div>
+          </section>
+
+          <section class="surface controls">
+            <div class="control">
+              <label for="monthFilter">Mes</label>
+              <select id="monthFilter">
+                <option value="all">Todos</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="typeFilter">Tipo</label>
+              <select id="typeFilter">
+                <option value="all">Todos</option>
+                <option value="earnings">Earnings</option>
+                <option value="macro">Macro</option>
+                <option value="watch">Watchlist</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="impactFilter">Impacto</label>
+              <select id="impactFilter">
+                <option value="all">Todos</option>
+                <option value="high">Alto</option>
+                <option value="medium">Medio</option>
+                <option value="low">Bajo</option>
+              </select>
+            </div>
+          </section>
+
+          <section class="surface watchlist">
+            <div class="section-head">
+              <h2>Watchlist</h2>
+              <span>Calidad + growth</span>
+            </div>
+            <div class="chips" id="watchlistChips"></div>
+          </section>
+        </aside>
+
+        <section class="content">
+          <section class="stats-grid">
+            <div class="stat">
+              <span>Eventos visibles</span>
+              <strong id="eventCounter">0</strong>
+            </div>
+            <div class="stat">
+              <span>Alto impacto</span>
+              <strong id="highImpactCounter">0</strong>
+            </div>
+            <div class="stat">
+              <span>Earnings</span>
+              <strong id="earningsCounter">0</strong>
+            </div>
+          </section>
+
+          <section class="surface timeline-panel">
+            <div class="timeline-head">
+              <div>
+                <span class="kicker">Calendario</span>
+                <h2>Fechas para vigilar</h2>
+              </div>
+              <button class="ghost-button" id="resetFilters" type="button">Limpiar filtros</button>
+            </div>
+            <div id="timeline" class="timeline"></div>
+          </section>
+        </section>
       </section>
 
-      <section class="panel watchlist">
-        <h2>Watchlist sugerida (calidad + crecimiento)</h2>
-        <div class="chips" id="watchlistChips"></div>
-      </section>
-
-      <section class="panel timeline-panel">
-        <div class="timeline-head">
-          <h2>Calendario</h2>
-          <span id="eventCounter">0 eventos</span>
-        </div>
-        <div id="timeline" class="timeline"></div>
-      </section>
+      <footer class="footer-note">
+        Estimaciones orientativas para planificacion. No son garantia de retorno ni recomendacion personalizada.
+      </footer>
     </main>
 
     <template id="eventTemplate">
       <article class="event-card">
-        <div class="event-top">
-          <span class="badge date"></span>
-          <span class="badge impact"></span>
-          <span class="badge type"></span>
+        <div class="event-date">
+          <span class="day"></span>
+          <span class="month"></span>
         </div>
-        <h3 class="title"></h3>
-        <p class="meta"></p>
-        <p class="note"></p>
-        <p class="source"></p>
+        <div class="event-body">
+          <div class="event-top">
+            <span class="badge impact"></span>
+            <span class="badge type"></span>
+            <span class="badge risk"></span>
+          </div>
+          <h3 class="title"></h3>
+          <p class="meta"></p>
+          <p class="note"></p>
+          <div class="strategy-box">
+            <div>
+              <span>Foco</span>
+              <strong class="focus"></strong>
+            </div>
+            <div>
+              <span>Entrada</span>
+              <strong class="entry"></strong>
+            </div>
+            <div>
+              <span>Rango</span>
+              <strong class="range"></strong>
+            </div>
+          </div>
+          <details>
+            <summary>Plan tactico</summary>
+            <p class="plan"></p>
+            <p class="source"></p>
+          </details>
+        </div>
       </article>
     </template>
 

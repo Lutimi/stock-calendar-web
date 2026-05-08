@@ -371,6 +371,12 @@ const typeFilter = document.getElementById("typeFilter");
 const impactFilter = document.getElementById("impactFilter");
 const timeline = document.getElementById("timeline");
 const eventCounter = document.getElementById("eventCounter");
+const highImpactCounter = document.getElementById("highImpactCounter");
+const earningsCounter = document.getElementById("earningsCounter");
+const nextTitle = document.getElementById("nextTitle");
+const nextMeta = document.getElementById("nextMeta");
+const nextCountdown = document.getElementById("nextCountdown");
+const resetFilters = document.getElementById("resetFilters");
 const eventTemplate = document.getElementById("eventTemplate");
 const watchlistChips = document.getElementById("watchlistChips");
 
@@ -405,6 +411,23 @@ function fmtDate(raw) {
   });
 }
 
+function dateParts(raw) {
+  const [y, m, d] = raw.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return {
+    day: String(d).padStart(2, "0"),
+    month: dt.toLocaleDateString("es-PE", { month: "short", timeZone: "UTC" }),
+  };
+}
+
+function daysUntil(raw) {
+  const today = new Date();
+  const start = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  const [y, m, d] = raw.split("-").map(Number);
+  const target = Date.UTC(y, m - 1, d);
+  return Math.ceil((target - start) / 86400000);
+}
+
 function applyFilters(data) {
   return data.filter((event) => {
     const monthOk = monthFilter.value === "all" || event.month === monthFilter.value;
@@ -414,20 +437,31 @@ function applyFilters(data) {
   });
 }
 
+function updateSummary(sorted) {
+  const upcoming = sorted.find((event) => daysUntil(event.date) >= 0) || sorted[0];
+  if (!upcoming) return;
+
+  const diff = daysUntil(upcoming.date);
+  nextTitle.textContent = upcoming.title;
+  nextMeta.textContent = `${fmtDate(upcoming.date)} | ${upcoming.meta}`;
+  nextCountdown.textContent = diff === 0 ? "Hoy" : `${diff} dia(s)`;
+}
+
 function render() {
   timeline.innerHTML = "";
   const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
   const filtered = applyFilters(sorted);
+  updateSummary(sorted);
 
   filtered.forEach((item) => {
     const node = eventTemplate.content.cloneNode(true);
+    const parts = dateParts(item.date);
+    node.querySelector(".day").textContent = parts.day;
+    node.querySelector(".month").textContent = parts.month;
     node.querySelector(".title").textContent = item.title;
     node.querySelector(".meta").textContent = item.meta;
     node.querySelector(".note").textContent = item.note;
     node.querySelector(".source").textContent = `Fuente: ${item.source}`;
-
-    const date = node.querySelector(".badge.date");
-    date.textContent = fmtDate(item.date);
 
     const impact = node.querySelector(".badge.impact");
     impact.textContent = `impacto: ${item.impact}`;
@@ -443,31 +477,31 @@ function render() {
       play: "Sin pauta tactica cargada.",
     };
 
-    const strategyLine = document.createElement("p");
-    strategyLine.className = "meta";
-    strategyLine.textContent = `Estrategia: foco ${strategy.focus.join(", ") || "N/A"} | comprar aprox ${strategy.buyDaysBefore} dia(s) antes | rango estimado ${strategy.gainRangePct} | riesgo ${strategy.riskLevel}`;
+    const risk = node.querySelector(".badge.risk");
+    risk.textContent = `riesgo: ${strategy.riskLevel}`;
+    risk.classList.add(strategy.riskLevel);
 
-    const playLine = document.createElement("p");
-    playLine.className = "note";
-    playLine.textContent = `Plan tactico: ${strategy.play}`;
-
-    const disclaimer = document.createElement("p");
-    disclaimer.className = "source";
-    disclaimer.textContent = "Estimacion orientativa basada en volatilidad historica de eventos parecidos. No es garantia de retorno.";
-
-    const card = node.querySelector(".event-card");
-    card.appendChild(strategyLine);
-    card.appendChild(playLine);
-    card.appendChild(disclaimer);
+    node.querySelector(".focus").textContent = strategy.focus.join(", ") || "N/A";
+    node.querySelector(".entry").textContent = `${strategy.buyDaysBefore} dia(s) antes`;
+    node.querySelector(".range").textContent = strategy.gainRangePct;
+    node.querySelector(".plan").textContent = strategy.play;
     timeline.appendChild(node);
   });
 
-  eventCounter.textContent = `${filtered.length} evento(s)`;
+  eventCounter.textContent = filtered.length;
+  highImpactCounter.textContent = filtered.filter((event) => event.impact === "high").length;
+  earningsCounter.textContent = filtered.filter((event) => event.type === "earnings").length;
 }
 
 monthFilter.addEventListener("change", render);
 typeFilter.addEventListener("change", render);
 impactFilter.addEventListener("change", render);
+resetFilters.addEventListener("click", () => {
+  monthFilter.value = "all";
+  typeFilter.value = "all";
+  impactFilter.value = "all";
+  render();
+});
 
 fillMonthFilter();
 fillWatchlist();
