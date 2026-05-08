@@ -516,6 +516,7 @@ const typeFilter = document.getElementById("typeFilter");
 const impactFilter = document.getElementById("impactFilter");
 const buyOnlyFilter = document.getElementById("buyOnlyFilter");
 const timeline = document.getElementById("timeline");
+const decisionTimeline = document.getElementById("decisionTimeline");
 const eventCounter = document.getElementById("eventCounter");
 const highImpactCounter = document.getElementById("highImpactCounter");
 const earningsCounter = document.getElementById("earningsCounter");
@@ -524,6 +525,9 @@ const nextTitle = document.getElementById("nextTitle");
 const nextMeta = document.getElementById("nextMeta");
 const nextCountdown = document.getElementById("nextCountdown");
 const resetFilters = document.getElementById("resetFilters");
+const showBuyOnly = document.getElementById("showBuyOnly");
+const tabButtons = document.querySelectorAll(".tab-button");
+const viewPanels = document.querySelectorAll(".view-panel");
 const eventTemplate = document.getElementById("eventTemplate");
 const earningsTemplate = document.getElementById("earningsTemplate");
 const earningsGrid = document.getElementById("earningsGrid");
@@ -674,11 +678,27 @@ function updateSummary(sorted) {
 
 function render() {
   timeline.innerHTML = "";
+  decisionTimeline.innerHTML = "";
   const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
   const filtered = applyFilters(sorted);
+  const decisionItems = filtered.filter((event) => buildDecision(event).action !== "avoid");
   updateSummary(sorted);
 
   filtered.forEach((item) => {
+    timeline.appendChild(createEventCard(item));
+  });
+
+  decisionItems.forEach((item) => {
+    decisionTimeline.appendChild(createEventCard(item));
+  });
+
+  eventCounter.textContent = filtered.length;
+  highImpactCounter.textContent = filtered.filter((event) => event.impact === "high").length;
+  earningsCounter.textContent = filtered.filter((event) => event.type === "earnings").length;
+  buyCounter.textContent = filtered.filter((event) => buildDecision(event).action === "buy").length;
+}
+
+function createEventCard(item) {
     const node = eventTemplate.content.cloneNode(true);
     const parts = dateParts(item.date);
     node.querySelector(".day").textContent = parts.day;
@@ -735,13 +755,7 @@ function render() {
     } else {
       sourceLink.hidden = true;
     }
-    timeline.appendChild(node);
-  });
-
-  eventCounter.textContent = filtered.length;
-  highImpactCounter.textContent = filtered.filter((event) => event.impact === "high").length;
-  earningsCounter.textContent = filtered.filter((event) => event.type === "earnings").length;
-  buyCounter.textContent = filtered.filter((event) => buildDecision(event).action === "buy").length;
+    return node;
 }
 
 profileFilter.addEventListener("change", render);
@@ -756,6 +770,24 @@ resetFilters.addEventListener("click", () => {
   impactFilter.value = "all";
   buyOnlyFilter.checked = false;
   render();
+});
+showBuyOnly.addEventListener("click", () => {
+  buyOnlyFilter.checked = true;
+  setView("decisions");
+  render();
+});
+
+function setView(view) {
+  tabButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.view === view);
+  });
+  viewPanels.forEach((panel) => {
+    panel.hidden = panel.dataset.panel !== view;
+  });
+}
+
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => setView(button.dataset.view));
 });
 
 fillMonthFilter();

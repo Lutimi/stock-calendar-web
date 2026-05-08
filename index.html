@@ -25,6 +25,12 @@
         </div>
       </header>
 
+      <nav class="view-tabs" aria-label="Vistas">
+        <button class="tab-button active" type="button" data-view="decisions">Decisiones</button>
+        <button class="tab-button" type="button" data-view="earnings">Earnings</button>
+        <button class="tab-button" type="button" data-view="calendar">Calendario</button>
+      </nav>
+
       <section class="dashboard">
         <aside class="sidebar">
           <section class="surface summary">
@@ -113,7 +119,7 @@
             </div>
           </section>
 
-          <section class="surface timeline-panel">
+          <section class="surface timeline-panel view-panel" data-panel="earnings" hidden>
             <div class="timeline-head">
               <div>
                 <span class="kicker">Utilidades</span>
@@ -123,7 +129,18 @@
             <div id="earningsGrid" class="earnings-grid"></div>
           </section>
 
-          <section class="surface timeline-panel">
+          <section class="surface timeline-panel view-panel" data-panel="decisions">
+            <div class="timeline-head">
+              <div>
+                <span class="kicker">Decision</span>
+                <h2>Oportunidades para revisar</h2>
+              </div>
+              <button class="ghost-button" id="showBuyOnly" type="button">Solo comprables</button>
+            </div>
+            <div id="decisionTimeline" class="timeline"></div>
+          </section>
+
+          <section class="surface timeline-panel view-panel" data-panel="calendar" hidden>
             <div class="timeline-head">
               <div>
                 <span class="kicker">Calendario</span>

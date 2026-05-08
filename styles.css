@@ -91,6 +91,42 @@ h1 {
   font-size: 0.9rem;
 }
 
+.view-tabs {
+  display: inline-flex;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(17, 22, 33, 0.74);
+  padding: 4px;
+  margin-bottom: 16px;
+}
+
+.tab-button {
+  min-height: 36px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 800;
+  padding: 0 13px;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.tab-button:hover {
+  color: var(--text);
+}
+
+.tab-button.active {
+  background: var(--green);
+  color: #061c15;
+  transform: translateY(-1px);
+}
+
+[hidden] {
+  display: none !important;
+}
+
 .pulse {
   width: 9px;
   height: 9px;
@@ -690,6 +726,12 @@ details[open] summary {
   .timeline-head {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .view-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
   }
 
   h1 {
