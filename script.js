@@ -8,6 +8,13 @@ const events = [
     meta: "Evento de flujo",
     note: "Suele aumentar ruido intradia y rotaciones de corto plazo en indices y mega caps.",
     source: "Calendario de mercado",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "0% a 1.5%",
+      riskLevel: "medio",
+      play: "No buscar swing por OPEX. Mejor esperar confirmacion de cierre semanal.",
+    },
   },
   {
     date: "2026-05-20",
@@ -18,16 +25,13 @@ const events = [
     meta: "After market",
     note: "Evento clave para chips y AI. Alta volatilidad en NVDA, AMD, AVGO, QQQ y semiconductores.",
     source: "Manual confirmado",
-  },
-  {
-    date: "2026-06-03",
-    month: "2026-06",
-    type: "earnings",
-    impact: "high",
-    title: "Broadcom (AVGO) - Earnings",
-    meta: "After market",
-    note: "Importante para narrativa de infraestructura AI, networking y demanda enterprise.",
-    source: "Manual confirmado",
+    strategy: {
+      focus: ["NVDA", "AVGO", "QQQ"],
+      buyDaysBefore: 2,
+      gainRangePct: "-6% a +9%",
+      riskLevel: "alto",
+      play: "Entrada parcial 1-2 dias antes solo con posicion pequena. Segunda entrada post reporte si confirma.",
+    },
   },
   {
     date: "2026-05-21",
@@ -38,16 +42,47 @@ const events = [
     meta: "Sesion post earnings",
     note: "Confirmar si el movimiento de semiconductores continua o se revierte tras guidance.",
     source: "Regla tactica",
+    strategy: {
+      focus: ["NVDA", "SMH", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "1% a 5%",
+      riskLevel: "alto",
+      play: "Suele ser mejor operar este dia que adivinar antes del reporte. Buscar direccion clara en apertura.",
+    },
+  },
+  {
+    date: "2026-06-03",
+    month: "2026-06",
+    type: "earnings",
+    impact: "high",
+    title: "Broadcom (AVGO) - Earnings",
+    meta: "After market",
+    note: "Importante para narrativa de infraestructura AI, networking y demanda enterprise.",
+    source: "Manual confirmado",
+    strategy: {
+      focus: ["AVGO", "NVDA", "QQQ"],
+      buyDaysBefore: 2,
+      gainRangePct: "-5% a +8%",
+      riskLevel: "alto",
+      play: "Entrar escalonado. Si rompe al alza con volumen al dia siguiente, reforzar.",
+    },
   },
   {
     date: "2026-06-05",
     month: "2026-06",
     type: "macro",
     impact: "high",
-    title: "Non-Farm Payrolls (empleo EE. UU.)",
+    title: "Non-Farm Payrolls (empleo EE.UU.)",
     meta: "Dato macro",
-    note: "Puede mover tasas implícitas y compresion/expansion de multiplos en tech.",
+    note: "Puede mover tasas implicitas y compresion/expansion de multiplos en tech.",
     source: "Calendario macro estimado mensual",
+    strategy: {
+      focus: ["SPY", "QQQ", "MSFT"],
+      buyDaysBefore: 1,
+      gainRangePct: "-1.5% a +2%",
+      riskLevel: "medio",
+      play: "No comprar fuerte justo minutos antes del dato. Esperar 30-60 min despues de salida.",
+    },
   },
   {
     date: "2026-06-12",
@@ -56,8 +91,15 @@ const events = [
     impact: "high",
     title: "CPI Estados Unidos (estimado mensual)",
     meta: "Dato macro",
-    note: "Inflación impacta tasas y múltiplos de growth. Suele mover MSFT, GOOGL, AMZN, META y QQQ.",
+    note: "Inflacion impacta tasas y multiplos de growth. Suele mover MSFT, GOOGL, AMZN, META y QQQ.",
     source: "Fecha estimada, validar calendario oficial",
+    strategy: {
+      focus: ["QQQ", "MSFT", "GOOGL"],
+      buyDaysBefore: 1,
+      gainRangePct: "-2% a +2.5%",
+      riskLevel: "alto",
+      play: "Dato binario. Mejor entrar por partes: 50% antes y 50% tras reaccion si confirma tendencia.",
+    },
   },
   {
     date: "2026-06-15",
@@ -68,16 +110,30 @@ const events = [
     meta: "Dato macro",
     note: "Complementa lectura de inflacion y puede cambiar expectativas de politica monetaria.",
     source: "Fecha estimada, validar calendario oficial",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "-1% a +1.2%",
+      riskLevel: "medio",
+      play: "Impacto menor que CPI, util para ajustar tamano de riesgo.",
+    },
   },
   {
     date: "2026-06-17",
     month: "2026-06",
     type: "macro",
     impact: "high",
-    title: "FOMC / Decisión de la Fed (estimado)",
+    title: "FOMC / Decision de la Fed (estimado)",
     meta: "Dato macro",
-    note: "Día de riesgo direccional para mercado completo. Evitar entradas impulsivas antes del comunicado.",
+    note: "Dia de riesgo direccional para mercado completo. Evitar entradas impulsivas antes del comunicado.",
     source: "Fecha estimada, validar calendario oficial",
+    strategy: {
+      focus: ["SPY", "QQQ", "MSFT", "GOOGL"],
+      buyDaysBefore: 2,
+      gainRangePct: "-2.5% a +3.5%",
+      riskLevel: "alto",
+      play: "Reducir tamano antes del comunicado. Mejor operar confirmacion despues de conferencia.",
+    },
   },
   {
     date: "2026-06-19",
@@ -88,16 +144,30 @@ const events = [
     meta: "Evento de derivados",
     note: "Dia de alta actividad en derivados; posibles barridos de liquidez y falsas rupturas.",
     source: "Calendario de mercado",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "-1% a +1%",
+      riskLevel: "medio",
+      play: "Dia para gestionar riesgo, no para abrir posiciones grandes nuevas.",
+    },
   },
   {
     date: "2026-07-03",
     month: "2026-07",
     type: "macro",
     impact: "high",
-    title: "Non-Farm Payrolls (empleo EE. UU.)",
+    title: "Non-Farm Payrolls (empleo EE.UU.)",
     meta: "Dato macro",
-    note: "Clave para sensibilidad de growth y direction de indices antes de temporada de earnings.",
+    note: "Clave para sensibilidad de growth y direccion de indices antes de temporada de earnings.",
     source: "Calendario macro estimado mensual",
+    strategy: {
+      focus: ["QQQ", "MSFT", "AMZN"],
+      buyDaysBefore: 1,
+      gainRangePct: "-1.5% a +2%",
+      riskLevel: "medio",
+      play: "Si el mercado abre con gap fuerte, esperar pullback antes de entrar.",
+    },
   },
   {
     date: "2026-07-15",
@@ -106,8 +176,15 @@ const events = [
     impact: "high",
     title: "CPI Estados Unidos (estimado mensual)",
     meta: "Dato macro",
-    note: "Día crítico para valuation de tecnológicas y expectativas de recortes/subidas.",
+    note: "Dia critico para valuation de tecnologicas y expectativas de recortes/subidas.",
     source: "Fecha estimada, validar calendario oficial",
+    strategy: {
+      focus: ["QQQ", "GOOGL", "META"],
+      buyDaysBefore: 1,
+      gainRangePct: "-2% a +2.5%",
+      riskLevel: "alto",
+      play: "Alta volatilidad. Mantener stops mas amplios o no operar intradia.",
+    },
   },
   {
     date: "2026-07-17",
@@ -118,6 +195,13 @@ const events = [
     meta: "Evento de flujo",
     note: "Posible incremento de volatilidad de fin de semana y rotaciones sectoriales.",
     source: "Calendario de mercado",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "0% a 1.5%",
+      riskLevel: "medio",
+      play: "Usar para rebalancear, no para perseguir precio.",
+    },
   },
   {
     date: "2026-07-21",
@@ -125,9 +209,16 @@ const events = [
     type: "watch",
     impact: "medium",
     title: "Inicio estimado de temporada fuerte de mega caps",
-    meta: "Semana táctica",
-    note: "Reducir entradas impulsivas pre-reporte y priorizar confirmación post resultados.",
+    meta: "Semana tactica",
+    note: "Reducir entradas impulsivas pre-reporte y priorizar confirmacion post resultados.",
     source: "Ventana historica aproximada",
+    strategy: {
+      focus: ["MSFT", "GOOGL", "META", "AMZN"],
+      buyDaysBefore: 3,
+      gainRangePct: "-3% a +4%",
+      riskLevel: "alto",
+      play: "Entradas parciales en empresas con tendencia fuerte y caja solida.",
+    },
   },
   {
     date: "2026-07-22",
@@ -136,8 +227,15 @@ const events = [
     impact: "medium",
     title: "Ventana tentativa: Alphabet (GOOGL)",
     meta: "Semana de resultados (estimado)",
-    note: "Monitorear Cloud, márgenes y guidance de AI. Puede mover todo el bloque mega cap tech.",
-    source: "Ventana histórica aproximada",
+    note: "Monitorear Cloud, margenes y guidance de AI. Puede mover todo el bloque mega cap tech.",
+    source: "Ventana historica aproximada",
+    strategy: {
+      focus: ["GOOGL", "MSFT", "QQQ"],
+      buyDaysBefore: 2,
+      gainRangePct: "-4% a +6%",
+      riskLevel: "alto",
+      play: "Mejor trade: esperar guidance y comprar ruptura, no adivinar vela previa.",
+    },
   },
   {
     date: "2026-07-23",
@@ -147,7 +245,14 @@ const events = [
     title: "Ventana tentativa: Microsoft (MSFT)",
     meta: "Semana de resultados (estimado)",
     note: "Revisar crecimiento de Azure y comentarios de capex AI para validar continuidad de tendencia.",
-    source: "Ventana histórica aproximada",
+    source: "Ventana historica aproximada",
+    strategy: {
+      focus: ["MSFT", "QQQ"],
+      buyDaysBefore: 2,
+      gainRangePct: "-3.5% a +5%",
+      riskLevel: "alto",
+      play: "Si ya subio fuerte antes del reporte, entrar mas pequeno o esperar post-earnings.",
+    },
   },
   {
     date: "2026-07-24",
@@ -156,18 +261,32 @@ const events = [
     impact: "medium",
     title: "Ventana tentativa: AAPL",
     meta: "Semana de resultados (estimado)",
-    note: "Mirar guidance de iPhone/servicios y reacción de cadena de suministro.",
+    note: "Mirar guidance de iPhone/servicios y reaccion de cadena de suministro.",
     source: "Ventana historica aproximada",
+    strategy: {
+      focus: ["AAPL", "SPY", "QQQ"],
+      buyDaysBefore: 2,
+      gainRangePct: "-3% a +4.5%",
+      riskLevel: "medio",
+      play: "Menos beta que chips; mejor para balancear riesgo de cartera tech.",
+    },
   },
   {
     date: "2026-07-28",
     month: "2026-07",
     type: "watch",
     impact: "high",
-    title: "FOMC / Decisión de la Fed (estimado)",
+    title: "FOMC / Decision de la Fed (estimado)",
     meta: "Dato macro",
-    note: "Semana de alto riesgo para posiciones growth. Mejor operar con tamaño moderado.",
+    note: "Semana de alto riesgo para posiciones growth. Mejor operar con tamano moderado.",
     source: "Fecha estimada, validar calendario oficial",
+    strategy: {
+      focus: ["SPY", "QQQ", "MSFT", "GOOGL"],
+      buyDaysBefore: 2,
+      gainRangePct: "-2.5% a +3.5%",
+      riskLevel: "alto",
+      play: "Antes del FOMC: reducir size. Despues: operar direccion de mercado, no opinion.",
+    },
   },
   {
     date: "2026-07-29",
@@ -177,17 +296,31 @@ const events = [
     title: "Ventana tentativa: Meta (META) / Amazon (AMZN)",
     meta: "Semana de resultados (estimado)",
     note: "Publicidad, retail cloud y guidance. Alta probabilidad de movimientos bruscos post reporte.",
-    source: "Ventana histórica aproximada",
+    source: "Ventana historica aproximada",
+    strategy: {
+      focus: ["META", "AMZN", "QQQ"],
+      buyDaysBefore: 2,
+      gainRangePct: "-5% a +7%",
+      riskLevel: "alto",
+      play: "Elegir una de las dos para no duplicar riesgo de evento en la misma noche.",
+    },
   },
   {
     date: "2026-08-07",
     month: "2026-08",
     type: "macro",
     impact: "high",
-    title: "Non-Farm Payrolls (empleo EE. UU.)",
+    title: "Non-Farm Payrolls (empleo EE.UU.)",
     meta: "Dato macro",
-    note: "Marca el tono de riesgo del mes para indices y tecnológicas.",
+    note: "Marca el tono de riesgo del mes para indices y tecnologicas.",
     source: "Calendario macro estimado mensual",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 1,
+      gainRangePct: "-1.5% a +2%",
+      riskLevel: "medio",
+      play: "Si el dato sale mixto, no forzar trade; esperar cierre diario.",
+    },
   },
   {
     date: "2026-08-12",
@@ -198,6 +331,13 @@ const events = [
     meta: "Dato macro",
     note: "Evento clave para decidir si mantener momentum growth o rotar a defensivos.",
     source: "Fecha estimada, validar calendario oficial",
+    strategy: {
+      focus: ["QQQ", "MSFT", "META"],
+      buyDaysBefore: 1,
+      gainRangePct: "-2% a +2.5%",
+      riskLevel: "alto",
+      play: "Evento binario. Usar mitad de posicion habitual.",
+    },
   },
   {
     date: "2026-08-21",
@@ -208,12 +348,19 @@ const events = [
     meta: "Evento de flujo",
     note: "Puede generar movimientos artificiales de cierre en acciones muy operadas.",
     source: "Calendario de mercado",
+    strategy: {
+      focus: ["SPY", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "0% a 1.2%",
+      riskLevel: "medio",
+      play: "Dia para gestionar salida parcial y rebalanceo.",
+    },
   },
 ];
 
 const watchlist = [
   "MSFT - Core de calidad y cloud",
-  "GOOGL - Growth + márgenes",
+  "GOOGL - Growth + margenes",
   "AMZN - AWS + consumo",
   "META - Ads + AI momentum",
   "AVGO - Infraestructura AI",
@@ -287,6 +434,31 @@ function render() {
     impact.classList.add(item.impact);
 
     node.querySelector(".badge.type").textContent = item.type;
+
+    const strategy = item.strategy || {
+      focus: [],
+      buyDaysBefore: 0,
+      gainRangePct: "N/A",
+      riskLevel: "medio",
+      play: "Sin pauta tactica cargada.",
+    };
+
+    const strategyLine = document.createElement("p");
+    strategyLine.className = "meta";
+    strategyLine.textContent = `Estrategia: foco ${strategy.focus.join(", ") || "N/A"} | comprar aprox ${strategy.buyDaysBefore} dia(s) antes | rango estimado ${strategy.gainRangePct} | riesgo ${strategy.riskLevel}`;
+
+    const playLine = document.createElement("p");
+    playLine.className = "note";
+    playLine.textContent = `Plan tactico: ${strategy.play}`;
+
+    const disclaimer = document.createElement("p");
+    disclaimer.className = "source";
+    disclaimer.textContent = "Estimacion orientativa basada en volatilidad historica de eventos parecidos. No es garantia de retorno.";
+
+    const card = node.querySelector(".event-card");
+    card.appendChild(strategyLine);
+    card.appendChild(playLine);
+    card.appendChild(disclaimer);
     timeline.appendChild(node);
   });
 
