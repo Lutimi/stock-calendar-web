@@ -8,6 +8,7 @@ const events = [
     meta: "Evento de flujo",
     note: "Suele aumentar ruido intradia y rotaciones de corto plazo en indices y mega caps.",
     source: "Calendario de mercado",
+    thesis: "OPEX puede distorsionar flujos y causar movimientos falsos. Sirve mas para gestionar entradas ya planeadas que para abrir una compra nueva.",
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 0,
@@ -25,6 +26,8 @@ const events = [
     meta: "After market",
     note: "Evento clave para chips y AI. Alta volatilidad en NVDA, AMD, AVGO, QQQ y semiconductores.",
     source: "Manual confirmado",
+    sourceUrl: "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/",
+    thesis: "NVIDIA sigue siendo el termometro principal de AI. Su ultimo reporte mostro crecimiento fuerte de data center y el mercado suele usar su guidance para valorar todo el bloque de chips.",
     strategy: {
       focus: ["NVDA", "AVGO", "QQQ"],
       buyDaysBefore: 2,
@@ -42,6 +45,8 @@ const events = [
     meta: "Sesion post earnings",
     note: "Confirmar si el movimiento de semiconductores continua o se revierte tras guidance.",
     source: "Regla tactica",
+    sourceUrl: "https://investor.nvidia.com/financial-info/financial-reports",
+    thesis: "El dia posterior a NVDA suele dar una lectura mas limpia: si la reaccion confirma guidance fuerte, puede arrastrar semiconductores y QQQ.",
     strategy: {
       focus: ["NVDA", "SMH", "QQQ"],
       buyDaysBefore: 0,
@@ -59,6 +64,8 @@ const events = [
     meta: "After market",
     note: "Importante para narrativa de infraestructura AI, networking y demanda enterprise.",
     source: "Manual confirmado",
+    sourceUrl: "https://investors.broadcom.com/company-information/events-presentations",
+    thesis: "Broadcom es una jugada de infraestructura AI distinta a NVDA. Su proximo earnings del 3 de junio puede validar demanda en networking, custom silicon y AI infrastructure.",
     strategy: {
       focus: ["AVGO", "NVDA", "QQQ"],
       buyDaysBefore: 2,
@@ -76,6 +83,7 @@ const events = [
     meta: "Dato macro",
     note: "Puede mover tasas implicitas y compresion/expansion de multiplos en tech.",
     source: "Calendario macro estimado mensual",
+    thesis: "Empleo fuerte o debil cambia la expectativa de tasas. Eso afecta multiples de growth, especialmente QQQ y mega caps.",
     strategy: {
       focus: ["SPY", "QQQ", "MSFT"],
       buyDaysBefore: 1,
@@ -93,6 +101,7 @@ const events = [
     meta: "Dato macro",
     note: "Inflacion impacta tasas y multiplos de growth. Suele mover MSFT, GOOGL, AMZN, META y QQQ.",
     source: "Fecha estimada, validar calendario oficial",
+    thesis: "CPI es uno de los datos que mas mueve acciones growth. Una inflacion mas baja suele ayudar a QQQ; una sorpresa alta puede comprimir multiplos.",
     strategy: {
       focus: ["QQQ", "MSFT", "GOOGL"],
       buyDaysBefore: 1,
@@ -110,6 +119,7 @@ const events = [
     meta: "Dato macro",
     note: "Complementa lectura de inflacion y puede cambiar expectativas de politica monetaria.",
     source: "Fecha estimada, validar calendario oficial",
+    thesis: "PPI complementa CPI. No suele ser el catalizador principal, pero puede confirmar o enfriar la lectura de inflacion.",
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 0,
@@ -128,6 +138,7 @@ const events = [
     note: "Decision FOMC oficial. Reunion de dos dias, 16-17 de junio; statement 2:00 p.m. y conferencia 2:30 p.m. ET.",
     source: "Federal Reserve Calendar oficial",
     sourceUrl: "https://www.federalreserve.gov/newsevents/2026-june.htm",
+    thesis: "La Fed mueve la tasa esperada. Para tu tipo de cartera, importa porque QQQ/MSFT/GOOGL reaccionan fuerte a cambios en recortes o tono hawkish.",
     strategy: {
       focus: ["SPY", "QQQ", "MSFT", "GOOGL"],
       buyDaysBefore: 2,
@@ -145,6 +156,7 @@ const events = [
     meta: "Evento de derivados",
     note: "Dia de alta actividad en derivados; posibles barridos de liquidez y falsas rupturas.",
     source: "Calendario de mercado",
+    thesis: "Triple witching concentra vencimientos de derivados. Puede provocar volatilidad sin cambio real de fundamentales.",
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 0,
@@ -162,6 +174,7 @@ const events = [
     meta: "Dato macro",
     note: "Clave para sensibilidad de growth y direccion de indices antes de temporada de earnings.",
     source: "Calendario macro estimado mensual",
+    thesis: "Dato de empleo antes de earnings de mega caps: puede definir si el mercado llega con apetito de riesgo o en modo defensivo.",
     strategy: {
       focus: ["QQQ", "MSFT", "AMZN"],
       buyDaysBefore: 1,
@@ -179,6 +192,7 @@ const events = [
     meta: "Dato macro",
     note: "Dia critico para valuation de tecnologicas y expectativas de recortes/subidas.",
     source: "Fecha estimada, validar calendario oficial",
+    thesis: "CPI cerca de temporada de resultados puede amplificar movimientos: buena inflacion + buen guidance suele ser combo favorable.",
     strategy: {
       focus: ["QQQ", "GOOGL", "META"],
       buyDaysBefore: 1,
@@ -196,6 +210,7 @@ const events = [
     meta: "Evento de flujo",
     note: "Posible incremento de volatilidad de fin de semana y rotaciones sectoriales.",
     source: "Calendario de mercado",
+    thesis: "OPEX mensual puede afectar cierre semanal. Mejor usarlo para timing fino, no como tesis principal.",
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 0,
@@ -213,6 +228,7 @@ const events = [
     meta: "Semana tactica",
     note: "Reducir entradas impulsivas pre-reporte y priorizar confirmacion post resultados.",
     source: "Ventana historica aproximada",
+    thesis: "La temporada de mega caps concentra los reportes que mas pesan en SPY/QQQ. Aqui conviene preparar lista y no comprar todo junto.",
     strategy: {
       focus: ["MSFT", "GOOGL", "META", "AMZN"],
       buyDaysBefore: 3,
@@ -230,6 +246,7 @@ const events = [
     meta: "Semana de resultados (estimado)",
     note: "Monitorear Cloud, margenes y guidance de AI. Puede mover todo el bloque mega cap tech.",
     source: "Ventana historica aproximada",
+    thesis: "GOOGL combina Search, Cloud y AI. Si Cloud/guidance sorprenden, puede justificar expansion de multiple.",
     strategy: {
       focus: ["GOOGL", "MSFT", "QQQ"],
       buyDaysBefore: 2,
@@ -247,6 +264,7 @@ const events = [
     meta: "Semana de resultados (estimado)",
     note: "Revisar crecimiento de Azure y comentarios de capex AI para validar continuidad de tendencia.",
     source: "Ventana historica aproximada",
+    thesis: "MSFT es de las formas mas solidas de jugar AI/cloud. El punto clave es Azure y si el gasto en AI se traduce en ingresos.",
     strategy: {
       focus: ["MSFT", "QQQ"],
       buyDaysBefore: 2,
@@ -264,6 +282,7 @@ const events = [
     meta: "Semana de resultados (estimado)",
     note: "Mirar guidance de iPhone/servicios y reaccion de cadena de suministro.",
     source: "Ventana historica aproximada",
+    thesis: "AAPL puede balancear un poco el riesgo de chips, pero su upside depende mas de guidance de iPhone, servicios y narrativa de AI en dispositivos.",
     strategy: {
       focus: ["AAPL", "SPY", "QQQ"],
       buyDaysBefore: 2,
@@ -282,6 +301,7 @@ const events = [
     note: "Decision FOMC oficial. Reunion de dos dias, 28-29 de julio; suele mover tasas, QQQ y mega cap tech.",
     source: "Federal Reserve FOMC Calendar oficial",
     sourceUrl: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+    thesis: "La decision de julio puede cambiar el tono de riesgo para growth. Si la Fed suena mas flexible, QQQ suele beneficiarse; si suena dura, mejor esperar.",
     strategy: {
       focus: ["SPY", "QQQ", "MSFT", "GOOGL"],
       buyDaysBefore: 2,
@@ -299,6 +319,7 @@ const events = [
     meta: "Semana de resultados (estimado)",
     note: "Publicidad, retail cloud y guidance. Alta probabilidad de movimientos bruscos post reporte.",
     source: "Ventana historica aproximada",
+    thesis: "META y AMZN tienen catalysts fuertes pero diferentes: ads/AI engagement en META y AWS/retail margin en AMZN. Elegir una evita duplicar evento.",
     strategy: {
       focus: ["META", "AMZN", "QQQ"],
       buyDaysBefore: 2,
@@ -316,6 +337,7 @@ const events = [
     meta: "Dato macro",
     note: "Marca el tono de riesgo del mes para indices y tecnologicas.",
     source: "Calendario macro estimado mensual",
+    thesis: "Empleo marca el tono de agosto. Si el dato reduce miedo a tasas, puede favorecer compra en indices growth.",
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 1,
@@ -333,6 +355,7 @@ const events = [
     meta: "Dato macro",
     note: "Evento clave para decidir si mantener momentum growth o rotar a defensivos.",
     source: "Fecha estimada, validar calendario oficial",
+    thesis: "CPI de agosto puede reforzar o romper el momentum de growth tras earnings. Es evento clave para decidir si mantener o tomar ganancias.",
     strategy: {
       focus: ["QQQ", "MSFT", "META"],
       buyDaysBefore: 1,
@@ -350,6 +373,7 @@ const events = [
     meta: "Evento de flujo",
     note: "Puede generar movimientos artificiales de cierre en acciones muy operadas.",
     source: "Calendario de mercado",
+    thesis: "OPEX puede generar ruido de cierre. Sirve para rebalanceo y toma parcial si el mercado ya corrio.",
     strategy: {
       focus: ["SPY", "QQQ"],
       buyDaysBefore: 0,
@@ -499,6 +523,13 @@ function buildDecision(event) {
   return { action, score, reasons, profile: profile.label };
 }
 
+function probabilityLabel(score) {
+  if (score >= 78) return "Alta";
+  if (score >= 62) return "Media";
+  if (score >= 48) return "Baja-media";
+  return "Baja";
+}
+
 function applyFilters(data) {
   return data.filter((event) => {
     const decision = buildDecision(event);
@@ -560,9 +591,11 @@ function render() {
     decisionChip.classList.add(decision.action);
 
     node.querySelector(".score").textContent = `${decision.score}/100`;
+    node.querySelector(".probability").textContent = probabilityLabel(decision.score);
     node.querySelector(".focus").textContent = strategy.focus.join(", ") || "N/A";
     node.querySelector(".entry").textContent = `${strategy.buyDaysBefore} dia(s) antes`;
     node.querySelector(".range").textContent = strategy.gainRangePct;
+    node.querySelector(".why").textContent = item.thesis || "Catalizador pendiente de validar con fuente.";
     node.querySelector(".plan").textContent = strategy.play;
 
     const reasonList = node.querySelector(".reason-list");
