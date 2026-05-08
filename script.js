@@ -8,7 +8,7 @@ const events = [
     meta: "Evento de flujo",
     explain: "OPEX es el vencimiento de opciones. Ese dia puede haber movimientos raros porque traders e instituciones cierran o ajustan contratos.",
     note: "Suele aumentar ruido intradia y rotaciones de corto plazo en indices y mega caps.",
-    source: "Calendario de mercado",
+    source: "Calendario de mercado (no estoy seguro de hora exacta)",
     thesis: "OPEX puede distorsionar flujos y causar movimientos falsos. Sirve mas para gestionar entradas ya planeadas que para abrir una compra nueva.",
     strategy: {
       focus: ["SPY", "QQQ"],
@@ -207,7 +207,7 @@ const events = [
     meta: "Evento de derivados",
     explain: "Vencen varios tipos de derivados el mismo dia. Puede aumentar volumen, volatilidad y movimientos artificiales de corto plazo.",
     note: "Dia de alta actividad en derivados; posibles barridos de liquidez y falsas rupturas.",
-    source: "Calendario de mercado",
+    source: "Calendario de mercado (no estoy seguro de hora exacta)",
     thesis: "Triple witching concentra vencimientos de derivados. Puede provocar volatilidad sin cambio real de fundamentales.",
     strategy: {
       focus: ["SPY", "QQQ"],
@@ -286,7 +286,7 @@ const events = [
     meta: "Evento de flujo",
     explain: "Vencimiento mensual de opciones. No es una noticia de empresa, pero puede alterar precios cerca del cierre.",
     note: "Posible incremento de volatilidad de fin de semana y rotaciones sectoriales.",
-    source: "Calendario de mercado",
+    source: "Calendario de mercado (no estoy seguro de hora exacta)",
     thesis: "OPEX mensual puede afectar cierre semanal. Mejor usarlo para timing fino, no como tesis principal.",
     strategy: {
       focus: ["SPY", "QQQ"],
@@ -301,11 +301,11 @@ const events = [
     month: "2026-07",
     type: "watch",
     impact: "medium",
-    title: "Inicio estimado de temporada fuerte de mega caps",
+    title: "Inicio tentativo de temporada fuerte de mega caps",
     meta: "Semana tactica",
     explain: "Empieza la zona donde suelen reportar grandes tecnológicas. Sus resultados pesan mucho en SPY y QQQ.",
     note: "Reducir entradas impulsivas pre-reporte y priorizar confirmacion post resultados.",
-    source: "Ventana historica aproximada",
+    source: "No estoy seguro: ventana historica aproximada",
     thesis: "La temporada de mega caps concentra los reportes que mas pesan en SPY/QQQ. Aqui conviene preparar lista y no comprar todo junto.",
     strategy: {
       focus: ["MSFT", "GOOGL", "META", "AMZN"],
@@ -321,10 +321,10 @@ const events = [
     type: "watch",
     impact: "medium",
     title: "Ventana tentativa: Alphabet (GOOGL)",
-    meta: "Semana de resultados (estimado)",
+    meta: "Semana de resultados (no confirmado)",
     explain: "Ventana probable para resultados de Alphabet. El mercado mira Search, YouTube, Google Cloud y avances de AI.",
     note: "Monitorear Cloud, margenes y guidance de AI. Puede mover todo el bloque mega cap tech.",
-    source: "Ventana historica aproximada",
+    source: "No estoy seguro: ventana historica aproximada",
     thesis: "GOOGL combina Search, Cloud y AI. Si Cloud/guidance sorprenden, puede justificar expansion de multiple.",
     strategy: {
       focus: ["GOOGL", "MSFT", "QQQ"],
@@ -340,10 +340,10 @@ const events = [
     type: "watch",
     impact: "medium",
     title: "Ventana tentativa: Microsoft (MSFT)",
-    meta: "Semana de resultados (estimado)",
+    meta: "Semana de resultados (no confirmado)",
     explain: "Ventana probable para resultados de Microsoft. El foco suele estar en Azure, AI y crecimiento de cloud.",
     note: "Revisar crecimiento de Azure y comentarios de capex AI para validar continuidad de tendencia.",
-    source: "Ventana historica aproximada",
+    source: "No estoy seguro: ventana historica aproximada",
     thesis: "MSFT es de las formas mas solidas de jugar AI/cloud. El punto clave es Azure y si el gasto en AI se traduce en ingresos.",
     strategy: {
       focus: ["MSFT", "QQQ"],
@@ -359,10 +359,10 @@ const events = [
     type: "watch",
     impact: "medium",
     title: "Ventana tentativa: AAPL",
-    meta: "Semana de resultados (estimado)",
+    meta: "Semana de resultados (no confirmado)",
     explain: "Ventana probable para resultados de Apple. Importan iPhone, servicios, guidance y señales de demanda.",
     note: "Mirar guidance de iPhone/servicios y reaccion de cadena de suministro.",
-    source: "Ventana historica aproximada",
+    source: "No estoy seguro: ventana historica aproximada",
     thesis: "AAPL puede balancear un poco el riesgo de chips, pero su upside depende mas de guidance de iPhone, servicios y narrativa de AI en dispositivos.",
     strategy: {
       focus: ["AAPL", "SPY", "QQQ"],
@@ -398,10 +398,10 @@ const events = [
     type: "watch",
     impact: "medium",
     title: "Ventana tentativa: Meta (META) / Amazon (AMZN)",
-    meta: "Semana de resultados (estimado)",
+    meta: "Semana de resultados (no confirmado)",
     explain: "Zona probable de resultados para Meta y Amazon. Meta mueve publicidad/AI; Amazon mueve AWS, retail y margenes.",
     note: "Publicidad, retail cloud y guidance. Alta probabilidad de movimientos bruscos post reporte.",
-    source: "Ventana historica aproximada",
+    source: "No estoy seguro: ventana historica aproximada",
     thesis: "META y AMZN tienen catalysts fuertes pero diferentes: ads/AI engagement en META y AWS/retail margin en AMZN. Elegir una evita duplicar evento.",
     strategy: {
       focus: ["META", "AMZN", "QQQ"],
@@ -480,7 +480,7 @@ const events = [
     meta: "Evento de flujo",
     explain: "Vencimiento de opciones. Puede generar ruido de precio aunque no cambie la tesis de inversion.",
     note: "Puede generar movimientos artificiales de cierre en acciones muy operadas.",
-    source: "Calendario de mercado",
+    source: "Calendario de mercado (no estoy seguro de hora exacta)",
     thesis: "OPEX puede generar ruido de cierre. Sirve para rebalanceo y toma parcial si el mercado ya corrio.",
     strategy: {
       focus: ["SPY", "QQQ"],
@@ -525,7 +525,7 @@ const earningsStocks = [
     ticker: "MSFT",
     company: "Microsoft",
     date: "Finales de jul 2026",
-    status: "Ventana estimada",
+    status: "No estoy seguro",
     sourceUrl: "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q3/press-release-webcast",
     explain: "Microsoft reporta ingresos, EPS y avance de cloud/AI. El foco principal es Azure.",
     watch: ["Azure growth", "AI run-rate", "Capex AI", "Guidance de cloud"],
@@ -535,7 +535,7 @@ const earningsStocks = [
     ticker: "GOOGL",
     company: "Alphabet",
     date: "Finales de jul 2026",
-    status: "Ventana estimada",
+    status: "No estoy seguro",
     sourceUrl: "https://abc.xyz/investor/",
     explain: "Alphabet reporta Search, YouTube, Cloud y monetizacion de AI/Gemini.",
     watch: ["Google Cloud", "Search revenue", "AI monetization", "Margins"],
@@ -545,7 +545,7 @@ const earningsStocks = [
     ticker: "META",
     company: "Meta",
     date: "Finales de jul 2026",
-    status: "Ventana estimada",
+    status: "No estoy seguro",
     sourceUrl: "https://investor.atmeta.com/",
     explain: "Meta reporta publicidad, usuarios, costos y gasto en AI/metaverso.",
     watch: ["Ad revenue", "AI engagement", "Capex", "Reality Labs losses"],
@@ -554,8 +554,8 @@ const earningsStocks = [
   {
     ticker: "AMZN",
     company: "Amazon",
-    date: "Jul 30, 2026 aprox.",
-    status: "No confirmado",
+    date: "Jul 30, 2026 aprox. (no estoy seguro)",
+    status: "No estoy seguro",
     sourceUrl: "https://ir.aboutamazon.com/",
     explain: "Amazon reporta retail, AWS, publicidad y margenes. AWS suele mover mucho la accion.",
     watch: ["AWS growth", "Operating margin", "Ad revenue", "Guidance"],
@@ -565,7 +565,7 @@ const earningsStocks = [
     ticker: "AAPL",
     company: "Apple",
     date: "Finales de jul / inicios de ago 2026",
-    status: "Ventana estimada",
+    status: "No estoy seguro",
     sourceUrl: "https://investor.apple.com/investor-relations/default.aspx",
     explain: "Apple reporta iPhone, servicios, margenes y guidance. Tambien importa cualquier avance real en AI para dispositivos.",
     watch: ["iPhone demand", "Services growth", "Gross margin", "AI/device guidance"],
@@ -781,7 +781,7 @@ function renderEarningsStocks() {
     node.querySelector(".ticker").textContent = stock.ticker;
     node.querySelector(".company").textContent = stock.company;
     node.querySelector(".status").textContent = stock.status;
-    node.querySelector(".status").classList.add(stock.status.includes("Confirmado") ? "confirmed" : "estimated");
+    node.querySelector(".status").classList.add(stock.status.includes("Confirmado") ? "confirmed" : "uncertain");
     node.querySelector(".earnings-date").textContent = stock.date;
     node.querySelector(".earnings-explain").textContent = stock.explain;
     node.querySelector(".earnings-read").textContent = stock.read;

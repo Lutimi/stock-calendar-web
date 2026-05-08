@@ -428,6 +428,12 @@ h1 {
   border-color: rgba(240, 184, 79, 0.28);
 }
 
+.status.uncertain {
+  color: #ffe1a5;
+  background: rgba(240, 184, 79, 0.12);
+  border-color: rgba(240, 184, 79, 0.28);
+}
+
 .earnings-date {
   color: var(--cyan);
   font-weight: 900;
