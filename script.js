@@ -123,9 +123,9 @@ const events = [
     month: "2026-06",
     type: "macro",
     impact: "high",
-    title: "FOMC / Decision de la Fed (estimado)",
+    title: "FOMC / Decision de la Fed",
     meta: "Dato macro",
-    note: "Decision FOMC oficial. Reunión de dos dias, 16-17 de junio; statement 2:00 p.m. y conferencia 2:30 p.m. ET.",
+    note: "Decision FOMC oficial. Reunion de dos dias, 16-17 de junio; statement 2:00 p.m. y conferencia 2:30 p.m. ET.",
     source: "Federal Reserve Calendar oficial",
     sourceUrl: "https://www.federalreserve.gov/newsevents/2026-june.htm",
     strategy: {
@@ -279,7 +279,7 @@ const events = [
     impact: "high",
     title: "FOMC / Decision de la Fed",
     meta: "Dato macro",
-    note: "Decision FOMC oficial. Reunión de dos dias, 28-29 de julio; suele mover tasas, QQQ y mega cap tech.",
+    note: "Decision FOMC oficial. Reunion de dos dias, 28-29 de julio; suele mover tasas, QQQ y mega cap tech.",
     source: "Federal Reserve FOMC Calendar oficial",
     sourceUrl: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
     strategy: {
@@ -368,13 +368,40 @@ const watchlist = [
   "AVGO - Infraestructura AI",
 ];
 
+const profileRules = {
+  conservative: {
+    label: "Conservador",
+    minBuyScore: 76,
+    riskPenalty: { bajo: 0, medio: 8, alto: 18 },
+  },
+  balanced: {
+    label: "Balanceado",
+    minBuyScore: 68,
+    riskPenalty: { bajo: 0, medio: 4, alto: 10 },
+  },
+  aggressive: {
+    label: "Agresivo",
+    minBuyScore: 60,
+    riskPenalty: { bajo: 0, medio: 1, alto: 4 },
+  },
+};
+
+const typeScore = {
+  earnings: 18,
+  watch: 12,
+  macro: 6,
+};
+
 const monthFilter = document.getElementById("monthFilter");
+const profileFilter = document.getElementById("profileFilter");
 const typeFilter = document.getElementById("typeFilter");
 const impactFilter = document.getElementById("impactFilter");
+const buyOnlyFilter = document.getElementById("buyOnlyFilter");
 const timeline = document.getElementById("timeline");
 const eventCounter = document.getElementById("eventCounter");
 const highImpactCounter = document.getElementById("highImpactCounter");
 const earningsCounter = document.getElementById("earningsCounter");
+const buyCounter = document.getElementById("buyCounter");
 const nextTitle = document.getElementById("nextTitle");
 const nextMeta = document.getElementById("nextMeta");
 const nextCountdown = document.getElementById("nextCountdown");
@@ -430,12 +457,56 @@ function daysUntil(raw) {
   return Math.ceil((target - start) / 86400000);
 }
 
+function parseUpside(range) {
+  const matches = range.match(/[+-]?\d+(\.\d+)?/g);
+  if (!matches || matches.length === 0) return 0;
+  return Number(matches[matches.length - 1]);
+}
+
+function proximityScore(days) {
+  if (days < 0) return 0;
+  if (days <= 3) return 22;
+  if (days <= 10) return 18;
+  if (days <= 25) return 12;
+  if (days <= 55) return 7;
+  return 3;
+}
+
+function buildDecision(event) {
+  const profile = profileRules[profileFilter.value] || profileRules.balanced;
+  const strategy = event.strategy;
+  const days = daysUntil(event.date);
+  const upside = parseUpside(strategy.gainRangePct);
+  const impactBonus = event.impact === "high" ? 15 : event.impact === "medium" ? 8 : 3;
+  const timingBonus = days <= strategy.buyDaysBefore + 1 && days >= 0 ? 12 : 0;
+  const riskPenalty = profile.riskPenalty[strategy.riskLevel] || 0;
+  const base = 36 + impactBonus + typeScore[event.type] + proximityScore(days) + timingBonus + upside * 2;
+  const score = Math.max(0, Math.min(100, Math.round(base - riskPenalty)));
+
+  let action = "wait";
+  if (score >= profile.minBuyScore && days >= 0) action = "buy";
+  if (score < 48 || days < 0) action = "avoid";
+
+  const reasons = [];
+  if (days < 0) reasons.push("evento ya paso");
+  if (timingBonus) reasons.push("ventana de entrada cerca");
+  if (event.impact === "high") reasons.push("alto impacto");
+  if (strategy.riskLevel === "alto") reasons.push("riesgo alto");
+  if (upside >= 5) reasons.push("upside estimado fuerte");
+  if (event.type === "macro") reasons.push("depende del dato macro");
+  if (event.type === "earnings") reasons.push("guidance mueve precio");
+
+  return { action, score, reasons, profile: profile.label };
+}
+
 function applyFilters(data) {
   return data.filter((event) => {
+    const decision = buildDecision(event);
     const monthOk = monthFilter.value === "all" || event.month === monthFilter.value;
     const typeOk = typeFilter.value === "all" || event.type === typeFilter.value;
     const impactOk = impactFilter.value === "all" || event.impact === impactFilter.value;
-    return monthOk && typeOk && impactOk;
+    const buyOk = !buyOnlyFilter.checked || decision.action === "buy";
+    return monthOk && typeOk && impactOk && buyOk;
   });
 }
 
@@ -478,15 +549,30 @@ function render() {
       riskLevel: "medio",
       play: "Sin pauta tactica cargada.",
     };
+    const decision = buildDecision(item);
 
     const risk = node.querySelector(".badge.risk");
     risk.textContent = `riesgo: ${strategy.riskLevel}`;
     risk.classList.add(strategy.riskLevel);
 
+    const decisionChip = node.querySelector(".decision-chip");
+    decisionChip.textContent = decision.action === "buy" ? "considerar compra" : decision.action === "wait" ? "esperar" : "evitar";
+    decisionChip.classList.add(decision.action);
+
+    node.querySelector(".score").textContent = `${decision.score}/100`;
     node.querySelector(".focus").textContent = strategy.focus.join(", ") || "N/A";
     node.querySelector(".entry").textContent = `${strategy.buyDaysBefore} dia(s) antes`;
     node.querySelector(".range").textContent = strategy.gainRangePct;
     node.querySelector(".plan").textContent = strategy.play;
+
+    const reasonList = node.querySelector(".reason-list");
+    decision.reasons.forEach((reason) => {
+      const pill = document.createElement("span");
+      pill.className = "reason";
+      pill.textContent = reason;
+      reasonList.appendChild(pill);
+    });
+
     const sourceLink = node.querySelector(".source-link");
     if (item.sourceUrl) {
       sourceLink.href = item.sourceUrl;
@@ -500,15 +586,20 @@ function render() {
   eventCounter.textContent = filtered.length;
   highImpactCounter.textContent = filtered.filter((event) => event.impact === "high").length;
   earningsCounter.textContent = filtered.filter((event) => event.type === "earnings").length;
+  buyCounter.textContent = filtered.filter((event) => buildDecision(event).action === "buy").length;
 }
 
+profileFilter.addEventListener("change", render);
 monthFilter.addEventListener("change", render);
 typeFilter.addEventListener("change", render);
 impactFilter.addEventListener("change", render);
+buyOnlyFilter.addEventListener("change", render);
 resetFilters.addEventListener("click", () => {
+  profileFilter.value = "balanced";
   monthFilter.value = "all";
   typeFilter.value = "all";
   impactFilter.value = "all";
+  buyOnlyFilter.checked = false;
   render();
 });
 

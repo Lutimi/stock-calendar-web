@@ -17,11 +17,11 @@
       <header class="topbar">
         <div>
           <p class="eyebrow">Stock Calendar</p>
-          <h1>Radar de eventos</h1>
+          <h1>Decision radar</h1>
         </div>
         <div class="market-pill">
           <span class="pulse"></span>
-          <span>Plan tactico</span>
+          <span>Modo decision</span>
         </div>
       </header>
 
@@ -35,6 +35,14 @@
           </section>
 
           <section class="surface controls">
+            <div class="control">
+              <label for="profileFilter">Perfil</label>
+              <select id="profileFilter">
+                <option value="balanced">Balanceado</option>
+                <option value="conservative">Conservador</option>
+                <option value="aggressive">Agresivo</option>
+              </select>
+            </div>
             <div class="control">
               <label for="monthFilter">Mes</label>
               <select id="monthFilter">
@@ -59,6 +67,10 @@
                 <option value="low">Bajo</option>
               </select>
             </div>
+            <label class="toggle-row">
+              <input id="buyOnlyFilter" type="checkbox" />
+              <span>Mostrar solo oportunidades comprables</span>
+            </label>
           </section>
 
           <section class="surface watchlist">
@@ -83,6 +95,10 @@
             <div class="stat">
               <span>Earnings</span>
               <strong id="earningsCounter">0</strong>
+            </div>
+            <div class="stat decision-stat">
+              <span>Comprables</span>
+              <strong id="buyCounter">0</strong>
             </div>
           </section>
 
@@ -112,6 +128,7 @@
         </div>
         <div class="event-body">
           <div class="event-top">
+            <span class="decision-chip"></span>
             <span class="badge impact"></span>
             <span class="badge type"></span>
             <span class="badge risk"></span>
@@ -120,6 +137,10 @@
           <p class="meta"></p>
           <p class="note"></p>
           <div class="strategy-box">
+            <div>
+              <span>Score</span>
+              <strong class="score"></strong>
+            </div>
             <div>
               <span>Foco</span>
               <strong class="focus"></strong>
@@ -133,6 +154,7 @@
               <strong class="range"></strong>
             </div>
           </div>
+          <div class="reason-list"></div>
           <details>
             <summary>Plan tactico</summary>
             <p class="plan"></p>
