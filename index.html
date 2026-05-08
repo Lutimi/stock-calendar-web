@@ -116,6 +116,16 @@
           <section class="surface timeline-panel">
             <div class="timeline-head">
               <div>
+                <span class="kicker">Utilidades</span>
+                <h2>Earnings por stock</h2>
+              </div>
+            </div>
+            <div id="earningsGrid" class="earnings-grid"></div>
+          </section>
+
+          <section class="surface timeline-panel">
+            <div class="timeline-head">
+              <div>
                 <span class="kicker">Calendario</span>
                 <h2>Fechas para vigilar</h2>
               </div>
@@ -182,6 +192,23 @@
             <a class="source-link" target="_blank" rel="noreferrer">Abrir fuente</a>
           </details>
         </div>
+      </article>
+    </template>
+
+    <template id="earningsTemplate">
+      <article class="earnings-card">
+        <div class="earnings-head">
+          <div>
+            <span class="ticker"></span>
+            <h3 class="company"></h3>
+          </div>
+          <span class="status"></span>
+        </div>
+        <p class="earnings-date"></p>
+        <p class="earnings-explain"></p>
+        <div class="watch-points"></div>
+        <p class="earnings-read"></p>
+        <a class="earnings-source" target="_blank" rel="noreferrer">Fuente</a>
       </article>
     </template>
 

@@ -316,6 +316,108 @@ h1 {
   gap: 10px;
 }
 
+.earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.earnings-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(98, 182, 255, 0.07), transparent 45%),
+    var(--bg-soft);
+  padding: 14px;
+}
+
+.earnings-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.ticker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #061c15;
+  font-size: 0.76rem;
+  font-weight: 900;
+  padding: 0 9px;
+}
+
+.company {
+  margin-top: 7px;
+  font-size: 1.02rem;
+}
+
+.status {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 5px 8px;
+  white-space: nowrap;
+}
+
+.status.confirmed {
+  color: #bcffe8;
+  background: rgba(51, 214, 166, 0.12);
+  border-color: rgba(51, 214, 166, 0.28);
+}
+
+.status.estimated {
+  color: #ffe1a5;
+  background: rgba(240, 184, 79, 0.12);
+  border-color: rgba(240, 184, 79, 0.28);
+}
+
+.earnings-date {
+  color: var(--cyan);
+  font-weight: 900;
+}
+
+.earnings-explain,
+.earnings-read {
+  color: #d7dee9;
+  line-height: 1.43;
+  margin-top: 9px;
+}
+
+.watch-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.watch-points span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  padding: 6px 8px;
+}
+
+.earnings-source {
+  display: inline-flex;
+  margin-top: 10px;
+  color: var(--green);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.earnings-source:hover {
+  text-decoration: underline;
+}
+
 .event-card {
   display: grid;
   grid-template-columns: 76px minmax(0, 1fr);
@@ -599,6 +701,10 @@ details[open] summary {
   }
 
   .event-card {
+    grid-template-columns: 1fr;
+  }
+
+  .earnings-grid {
     grid-template-columns: 1fr;
   }
 

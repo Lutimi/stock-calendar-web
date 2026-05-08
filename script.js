@@ -413,6 +413,79 @@ const watchlist = [
   "AVGO - Infraestructura AI",
 ];
 
+const earningsStocks = [
+  {
+    ticker: "NVDA",
+    company: "NVIDIA",
+    date: "May 20, 2026",
+    status: "Confirmado",
+    sourceUrl: "https://www.wallstreethorizon.com/nvidia-earnings-calendar",
+    explain: "Reporte de utilidades despues del cierre. El mercado mira si la demanda de AI/data center sigue acelerando.",
+    watch: ["Data Center revenue", "Gross margin", "Guidance del siguiente trimestre", "Comentarios sobre Blackwell/Rubin"],
+    read: "Si supera expectativas y sube guidance, suele beneficiar NVDA, AVGO, AMD, SMH y QQQ. Si el guidance decepciona, puede pesar sobre todo el trade de AI.",
+  },
+  {
+    ticker: "AVGO",
+    company: "Broadcom",
+    date: "Jun 3, 2026",
+    status: "Confirmado",
+    sourceUrl: "https://www.nasdaq.com/press-release/broadcom-inc-announce-second-quarter-fiscal-year-2026-financial-results-wednesday",
+    explain: "Reporte de utilidades despues del cierre. Broadcom es clave para infraestructura AI, networking y custom chips.",
+    watch: ["AI revenue", "Networking", "VMware/software margins", "Guidance fiscal Q3"],
+    read: "Si confirma crecimiento fuerte en AI infrastructure, puede reforzar la tesis de semiconductores. Si software o guidance flojean, mejor esperar.",
+  },
+  {
+    ticker: "MSFT",
+    company: "Microsoft",
+    date: "Finales de jul 2026",
+    status: "Ventana estimada",
+    sourceUrl: "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q3/press-release-webcast",
+    explain: "Microsoft reporta ingresos, EPS y avance de cloud/AI. El foco principal es Azure.",
+    watch: ["Azure growth", "AI run-rate", "Capex AI", "Guidance de cloud"],
+    read: "Si Azure acelera y el gasto en AI se ve rentable, MSFT puede seguir siendo compra de calidad. Si capex preocupa, puede haber retroceso aunque venda bien.",
+  },
+  {
+    ticker: "GOOGL",
+    company: "Alphabet",
+    date: "Finales de jul 2026",
+    status: "Ventana estimada",
+    sourceUrl: "https://abc.xyz/investor/",
+    explain: "Alphabet reporta Search, YouTube, Cloud y monetizacion de AI/Gemini.",
+    watch: ["Google Cloud", "Search revenue", "AI monetization", "Margins"],
+    read: "Si Cloud y Search salen fuertes, puede justificar mas upside. Si AI presiona margenes o Search se desacelera, conviene esperar.",
+  },
+  {
+    ticker: "META",
+    company: "Meta",
+    date: "Finales de jul 2026",
+    status: "Ventana estimada",
+    sourceUrl: "https://investor.atmeta.com/",
+    explain: "Meta reporta publicidad, usuarios, costos y gasto en AI/metaverso.",
+    watch: ["Ad revenue", "AI engagement", "Capex", "Reality Labs losses"],
+    read: "Si ads crecen y AI ayuda a monetizar, puede ser oportunidad. Si el mercado castiga gasto en AI, mejor entrar despues de la reaccion.",
+  },
+  {
+    ticker: "AMZN",
+    company: "Amazon",
+    date: "Jul 30, 2026 aprox.",
+    status: "No confirmado",
+    sourceUrl: "https://ir.aboutamazon.com/",
+    explain: "Amazon reporta retail, AWS, publicidad y margenes. AWS suele mover mucho la accion.",
+    watch: ["AWS growth", "Operating margin", "Ad revenue", "Guidance"],
+    read: "Si AWS acelera y margenes mejoran, AMZN se vuelve atractiva. Si AWS decepciona, puede pesar mas que buenas ventas retail.",
+  },
+  {
+    ticker: "AAPL",
+    company: "Apple",
+    date: "Finales de jul / inicios de ago 2026",
+    status: "Ventana estimada",
+    sourceUrl: "https://investor.apple.com/investor-relations/default.aspx",
+    explain: "Apple reporta iPhone, servicios, margenes y guidance. Tambien importa cualquier avance real en AI para dispositivos.",
+    watch: ["iPhone demand", "Services growth", "Gross margin", "AI/device guidance"],
+    read: "Si servicios e iPhone sostienen crecimiento, es defensiva dentro de tech. Si guidance es flojo, no conviene perseguirla antes del reporte.",
+  },
+];
+
 const profileRules = {
   conservative: {
     label: "Conservador",
@@ -452,6 +525,8 @@ const nextMeta = document.getElementById("nextMeta");
 const nextCountdown = document.getElementById("nextCountdown");
 const resetFilters = document.getElementById("resetFilters");
 const eventTemplate = document.getElementById("eventTemplate");
+const earningsTemplate = document.getElementById("earningsTemplate");
+const earningsGrid = document.getElementById("earningsGrid");
 const watchlistChips = document.getElementById("watchlistChips");
 
 function fillMonthFilter() {
@@ -470,6 +545,31 @@ function fillWatchlist() {
     chip.className = "chip";
     chip.textContent = item;
     watchlistChips.appendChild(chip);
+  });
+}
+
+function renderEarningsStocks() {
+  earningsGrid.innerHTML = "";
+  earningsStocks.forEach((stock) => {
+    const node = earningsTemplate.content.cloneNode(true);
+    node.querySelector(".ticker").textContent = stock.ticker;
+    node.querySelector(".company").textContent = stock.company;
+    node.querySelector(".status").textContent = stock.status;
+    node.querySelector(".status").classList.add(stock.status.includes("Confirmado") ? "confirmed" : "estimated");
+    node.querySelector(".earnings-date").textContent = stock.date;
+    node.querySelector(".earnings-explain").textContent = stock.explain;
+    node.querySelector(".earnings-read").textContent = stock.read;
+
+    const points = node.querySelector(".watch-points");
+    stock.watch.forEach((item) => {
+      const pill = document.createElement("span");
+      pill.textContent = item;
+      points.appendChild(pill);
+    });
+
+    const source = node.querySelector(".earnings-source");
+    source.href = stock.sourceUrl;
+    earningsGrid.appendChild(node);
   });
 }
 
@@ -660,4 +760,5 @@ resetFilters.addEventListener("click", () => {
 
 fillMonthFilter();
 fillWatchlist();
+renderEarningsStocks();
 render();
