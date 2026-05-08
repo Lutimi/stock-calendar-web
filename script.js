@@ -125,8 +125,9 @@ const events = [
     impact: "high",
     title: "FOMC / Decision de la Fed (estimado)",
     meta: "Dato macro",
-    note: "Dia de riesgo direccional para mercado completo. Evitar entradas impulsivas antes del comunicado.",
-    source: "Fecha estimada, validar calendario oficial",
+    note: "Decision FOMC oficial. Reunión de dos dias, 16-17 de junio; statement 2:00 p.m. y conferencia 2:30 p.m. ET.",
+    source: "Federal Reserve Calendar oficial",
+    sourceUrl: "https://www.federalreserve.gov/newsevents/2026-june.htm",
     strategy: {
       focus: ["SPY", "QQQ", "MSFT", "GOOGL"],
       buyDaysBefore: 2,
@@ -272,14 +273,15 @@ const events = [
     },
   },
   {
-    date: "2026-07-28",
+    date: "2026-07-29",
     month: "2026-07",
     type: "watch",
     impact: "high",
-    title: "FOMC / Decision de la Fed (estimado)",
+    title: "FOMC / Decision de la Fed",
     meta: "Dato macro",
-    note: "Semana de alto riesgo para posiciones growth. Mejor operar con tamano moderado.",
-    source: "Fecha estimada, validar calendario oficial",
+    note: "Decision FOMC oficial. Reunión de dos dias, 28-29 de julio; suele mover tasas, QQQ y mega cap tech.",
+    source: "Federal Reserve FOMC Calendar oficial",
+    sourceUrl: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
     strategy: {
       focus: ["SPY", "QQQ", "MSFT", "GOOGL"],
       buyDaysBefore: 2,
@@ -485,6 +487,13 @@ function render() {
     node.querySelector(".entry").textContent = `${strategy.buyDaysBefore} dia(s) antes`;
     node.querySelector(".range").textContent = strategy.gainRangePct;
     node.querySelector(".plan").textContent = strategy.play;
+    const sourceLink = node.querySelector(".source-link");
+    if (item.sourceUrl) {
+      sourceLink.href = item.sourceUrl;
+      sourceLink.hidden = false;
+    } else {
+      sourceLink.hidden = true;
+    }
     timeline.appendChild(node);
   });
 
