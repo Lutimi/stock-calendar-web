@@ -14,7 +14,7 @@ const events = [
       buyDaysBefore: 0,
       gainRangePct: "0% a 1.5%",
       riskLevel: "medio",
-      play: "No buscar swing por OPEX. Mejor esperar confirmacion de cierre semanal.",
+      play: "Con 150 USD: no abrir compra nueva solo por OPEX. Si ya querias comprar SPY/QQQ, usa 50 USD y guarda 100 USD para el siguiente dia habil.",
     },
   },
   {
@@ -33,7 +33,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-6% a +9%",
       riskLevel: "alto",
-      play: "Entrada parcial 1-2 dias antes solo con posicion pequena. Segunda entrada post reporte si confirma.",
+      play: "Con 150 USD: compra 50 USD de NVDA o QQQ 1-2 dias antes si viene fuerte. Guarda 100 USD para el dia siguiente al reporte; solo los usas si abre verde y mantiene fuerza la primera hora.",
     },
   },
   {
@@ -52,7 +52,7 @@ const events = [
       buyDaysBefore: 0,
       gainRangePct: "1% a 5%",
       riskLevel: "alto",
-      play: "Suele ser mejor operar este dia que adivinar antes del reporte. Buscar direccion clara en apertura.",
+      play: "Con 150 USD: espera los primeros 45-60 min. Si NVDA y QQQ siguen verdes, compra 100 USD en QQQ o SMH y deja 50 USD por si hay pullback.",
     },
   },
   {
@@ -71,7 +71,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-5% a +8%",
       riskLevel: "alto",
-      play: "Entrar escalonado. Si rompe al alza con volumen al dia siguiente, reforzar.",
+      play: "Con 150 USD: compra 50 USD de AVGO 1-2 dias antes. Guarda 100 USD para despues del reporte; si el mercado premia guidance de AI, compras esos 100 USD al dia siguiente.",
     },
   },
   {
@@ -89,7 +89,7 @@ const events = [
       buyDaysBefore: 1,
       gainRangePct: "-1.5% a +2%",
       riskLevel: "medio",
-      play: "No comprar fuerte justo minutos antes del dato. Esperar 30-60 min despues de salida.",
+      play: "Con 150 USD: no compres antes del dato. Espera 30-60 min; si SPY/QQQ suben y no se devuelven, compra 100 USD y guarda 50 USD.",
     },
   },
   {
@@ -107,7 +107,7 @@ const events = [
       buyDaysBefore: 1,
       gainRangePct: "-2% a +2.5%",
       riskLevel: "alto",
-      play: "Dato binario. Mejor entrar por partes: 50% antes y 50% tras reaccion si confirma tendencia.",
+      play: "Con 150 USD: si quieres anticipar, maximo 50 USD antes del CPI. Los otros 100 USD usalos despues del dato solo si QQQ confirma subida.",
     },
   },
   {
@@ -125,7 +125,7 @@ const events = [
       buyDaysBefore: 0,
       gainRangePct: "-1% a +1.2%",
       riskLevel: "medio",
-      play: "Impacto menor que CPI, util para ajustar tamano de riesgo.",
+      play: "Con 150 USD: no lo uses como razon principal para comprar. Si el dato ayuda al mercado, puedes sumar 50-75 USD a SPY/QQQ.",
     },
   },
   {
@@ -144,7 +144,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-2.5% a +3.5%",
       riskLevel: "alto",
-      play: "Reducir tamano antes del comunicado. Mejor operar confirmacion despues de conferencia.",
+      play: "Con 150 USD: compra maximo 50 USD antes de la Fed. Guarda 100 USD para despues de la conferencia; si QQQ sostiene verde, compras el resto.",
     },
   },
   {
@@ -162,7 +162,7 @@ const events = [
       buyDaysBefore: 0,
       gainRangePct: "-1% a +1%",
       riskLevel: "medio",
-      play: "Dia para gestionar riesgo, no para abrir posiciones grandes nuevas.",
+      play: "Con 150 USD: evita abrir posicion grande. Si quieres comprar igual, usa 50 USD y guarda 100 USD para el lunes o siguiente sesion.",
     },
   },
   {
@@ -180,7 +180,7 @@ const events = [
       buyDaysBefore: 1,
       gainRangePct: "-1.5% a +2%",
       riskLevel: "medio",
-      play: "Si el mercado abre con gap fuerte, esperar pullback antes de entrar.",
+      play: "Con 150 USD: espera apertura. Si QQQ sube demasiado de golpe, no persigas; compra 75 USD en pullback y guarda 75 USD.",
     },
   },
   {
@@ -198,7 +198,7 @@ const events = [
       buyDaysBefore: 1,
       gainRangePct: "-2% a +2.5%",
       riskLevel: "alto",
-      play: "Alta volatilidad. Mantener stops mas amplios o no operar intradia.",
+      play: "Con 150 USD: usa 50 USD antes si estas convencido. Compra 100 USD despues del CPI solo si el mercado rompe al alza con fuerza.",
     },
   },
   {
@@ -216,7 +216,7 @@ const events = [
       buyDaysBefore: 0,
       gainRangePct: "0% a 1.5%",
       riskLevel: "medio",
-      play: "Usar para rebalancear, no para perseguir precio.",
+      play: "Con 150 USD: si quieres sumar a SPY/QQQ, haz 50 USD ese dia y 100 USD en la siguiente sesion para evitar ruido de cierre.",
     },
   },
   {
@@ -234,7 +234,7 @@ const events = [
       buyDaysBefore: 3,
       gainRangePct: "-3% a +4%",
       riskLevel: "alto",
-      play: "Entradas parciales en empresas con tendencia fuerte y caja solida.",
+      play: "Con 150 USD: reparte 50 USD MSFT, 50 USD GOOGL y guarda 50 USD para el primer reporte que salga mejor de lo esperado.",
     },
   },
   {
@@ -252,7 +252,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-4% a +6%",
       riskLevel: "alto",
-      play: "Mejor trade: esperar guidance y comprar ruptura, no adivinar vela previa.",
+      play: "Con 150 USD: compra 50 USD de GOOGL antes si quieres participar. Guarda 100 USD para despues; solo compras si Cloud/guidance gusta al mercado.",
     },
   },
   {
@@ -270,7 +270,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-3.5% a +5%",
       riskLevel: "alto",
-      play: "Si ya subio fuerte antes del reporte, entrar mas pequeno o esperar post-earnings.",
+      play: "Con 150 USD: si MSFT viene subiendo fuerte, compra solo 50 USD antes. Usa 100 USD despues si Azure/guidance salen fuertes y la accion no se vende.",
     },
   },
   {
@@ -288,7 +288,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-3% a +4.5%",
       riskLevel: "medio",
-      play: "Menos beta que chips; mejor para balancear riesgo de cartera tech.",
+      play: "Con 150 USD: AAPL es mas balanceada. Puedes comprar 75 USD antes y guardar 75 USD para reaccion post earnings.",
     },
   },
   {
@@ -307,7 +307,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-2.5% a +3.5%",
       riskLevel: "alto",
-      play: "Antes del FOMC: reducir size. Despues: operar direccion de mercado, no opinion.",
+      play: "Con 150 USD: antes del FOMC usa maximo 50 USD. Despues de Powell, si QQQ mantiene tendencia positiva, compras 100 USD.",
     },
   },
   {
@@ -325,7 +325,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-5% a +7%",
       riskLevel: "alto",
-      play: "Elegir una de las dos para no duplicar riesgo de evento en la misma noche.",
+      play: "Con 150 USD: elige META o AMZN, no ambas. Compra 50 USD antes y guarda 100 USD para despues del reporte si la reaccion es buena.",
     },
   },
   {
@@ -343,7 +343,7 @@ const events = [
       buyDaysBefore: 1,
       gainRangePct: "-1.5% a +2%",
       riskLevel: "medio",
-      play: "Si el dato sale mixto, no forzar trade; esperar cierre diario.",
+      play: "Con 150 USD: si el dato sale mixto, no compres. Si SPY/QQQ cierran fuertes, compra 100 USD al final del dia y guarda 50 USD.",
     },
   },
   {
@@ -361,7 +361,7 @@ const events = [
       buyDaysBefore: 1,
       gainRangePct: "-2% a +2.5%",
       riskLevel: "alto",
-      play: "Evento binario. Usar mitad de posicion habitual.",
+      play: "Con 150 USD: usa 50 USD antes como maximo. Compra 100 USD despues solo si CPI favorece tasas y QQQ confirma.",
     },
   },
   {
@@ -379,7 +379,7 @@ const events = [
       buyDaysBefore: 0,
       gainRangePct: "0% a 1.2%",
       riskLevel: "medio",
-      play: "Dia para gestionar salida parcial y rebalanceo.",
+      play: "Con 150 USD: no compres todo ese dia. Usa 50 USD si ves oportunidad y guarda 100 USD para evitar ruido de OPEX.",
     },
   },
 ];
