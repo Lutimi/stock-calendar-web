@@ -1,5 +1,30 @@
 const events = [
   {
+    date: "2026-05-11",
+    month: "2026-05",
+    type: "watch",
+    impact: "high",
+    title: "AMD post-rally: no perseguir vela extendida",
+    meta: "Alerta de mercado",
+    explain: "AMD subio fuerte despues de resultados. El catalizador fue real, pero cuando una accion ya corrio mucho, el riesgo es comprar justo en euforia.",
+    note: "Revisar si consolida antes de sumar. Si no corrige, mejor dejarla en watchlist y no forzar entrada.",
+    source: "AMD Q1 2026 + prensa de mercado",
+    sourceUrl: "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+    thesis: "La historia de AMD mejoro por data center y AI, pero despues de un salto vertical la relacion entrada/riesgo empeora. La oportunidad buena suele aparecer en pullback o consolidacion.",
+    prediction: {
+      label: "Favorable, pero extendida",
+      tone: "caution",
+      text: "La noticia de fondo es positiva, pero perseguir despues del rally tiene peor probabilidad. Mejor esperar retroceso o base lateral.",
+    },
+    strategy: {
+      focus: ["AMD", "NVDA", "QQQ"],
+      buyDaysBefore: 0,
+      gainRangePct: "-5% a +4%",
+      riskLevel: "alto",
+      play: "Con 150 USD: no metas los 150 USD de golpe. Si te gana la ansiedad, maximo 30-40 USD en AMD y guarda 110-120 USD para pullback o para NVDA despues del CPI.",
+    },
+  },
+  {
     date: "2026-05-15",
     month: "2026-05",
     type: "macro",
@@ -45,7 +70,7 @@ const events = [
       buyDaysBefore: 2,
       gainRangePct: "-6% a +9%",
       riskLevel: "alto",
-      play: "Con 150 USD: compra 50 USD de NVDA o QQQ 1-2 dias antes si viene fuerte. Guarda 100 USD para el dia siguiente al reporte; solo los usas si abre verde y mantiene fuerza la primera hora.",
+      play: "Con 150 USD: no compres fuerte antes del CPI del 12 de mayo. Si NVDA da pullback ordenado, prueba 50 USD 1-2 dias antes del earnings y guarda 100 USD para la reaccion post reporte.",
     },
   },
   {
@@ -513,12 +538,51 @@ const events = [
 ];
 
 const watchlist = [
+  "AMD - AI/data center, esperar pullback",
+  "NVDA - Earnings clave 20 may",
   "MSFT - Core de calidad y cloud",
   "GOOGL - Growth + margenes",
-  "AMZN - AWS + consumo",
-  "META - Ads + AI momentum",
   "AVGO - Infraestructura AI",
 ];
+
+const marketBrief = {
+  title: "Mercado 11 mayo 2026: momentum fuerte, pero CPI manana",
+  updated: "Actualizado 11 may 2026, 10:22 a.m. Peru",
+  summary:
+    "El mercado viene con tono positivo por tech/AI y semiconductores, pero manana martes 12 de mayo a las 7:30 a.m. Peru sale CPI. Eso puede cambiar rapido el apetito por QQQ, NVDA, AMD y mega caps.",
+  action:
+    "Plan para hoy: no meter los 2,000 USD de golpe. Si quieres accionar, usa solo 10%-20% antes del CPI y guarda la mayor parte para comprar despues de ver la reaccion del mercado.",
+  items: [
+    {
+      label: "AMD",
+      stance: "No perseguir",
+      tone: "caution",
+      text: "La subida tiene fundamento por resultados: revenue Q1 +38% y data center +57% YoY. Pero despues de rally fuerte, la entrada buena es pullback o consolidacion.",
+      source: "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+    },
+    {
+      label: "NVDA",
+      stance: "Vigilar entrada",
+      tone: "positive",
+      text: "Sigue siendo la pieza central del trade AI. Mejor comprar por tramos: una parte pequena si corrige y otra despues de CPI/earnings si confirma fuerza.",
+      source: "https://www.wallstreethorizon.com/nvidia-earnings-calendar",
+    },
+    {
+      label: "CPI",
+      stance: "Evento clave",
+      tone: "neutral",
+      text: "Sale manana 12 de mayo a las 8:30 a.m. ET, 7:30 a.m. Peru. Si inflacion sale caliente puede golpear growth; si sale suave puede ayudar a QQQ.",
+      source: "https://www.bls.gov/schedule/news_release/cpi.htm",
+    },
+    {
+      label: "SPY/QQQ",
+      stance: "Comprar por tramos",
+      tone: "positive",
+      text: "Para portafolio base, mejor seguir acumulando indices que saltar 100% a AMD despues de una vela grande. SPY/QQQ reducen riesgo de ticker individual.",
+      source: "https://www.kiplinger.com/investing/stocks/nasdaq-jumps-to-new-high-on-amd-earnings-stock-market-today",
+    },
+  ],
+};
 
 const earningsStocks = [
   {
@@ -774,6 +838,11 @@ const earningsGrid = document.getElementById("earningsGrid");
 const macroTemplate = document.getElementById("macroTemplate");
 const macroGrid = document.getElementById("macroGrid");
 const watchlistChips = document.getElementById("watchlistChips");
+const marketBriefTitle = document.getElementById("marketBriefTitle");
+const marketBriefUpdated = document.getElementById("marketBriefUpdated");
+const marketBriefSummary = document.getElementById("marketBriefSummary");
+const marketBriefAction = document.getElementById("marketBriefAction");
+const marketBriefGrid = document.getElementById("marketBriefGrid");
 
 function fillMonthFilter() {
   const months = Array.from(new Set(events.map((e) => e.month))).sort();
@@ -850,6 +919,41 @@ function renderMacroEvents() {
     const source = node.querySelector(".macro-source");
     source.href = event.sourceUrl;
     macroGrid.appendChild(node);
+  });
+}
+
+function renderMarketBrief() {
+  marketBriefTitle.textContent = marketBrief.title;
+  marketBriefUpdated.textContent = marketBrief.updated;
+  marketBriefSummary.textContent = marketBrief.summary;
+  marketBriefAction.textContent = marketBrief.action;
+  marketBriefGrid.innerHTML = "";
+
+  marketBrief.items.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = `brief-card ${item.tone}`;
+
+    const top = document.createElement("div");
+    top.className = "brief-card-top";
+
+    const label = document.createElement("strong");
+    label.textContent = item.label;
+
+    const stance = document.createElement("span");
+    stance.textContent = item.stance;
+
+    const text = document.createElement("p");
+    text.textContent = item.text;
+
+    const source = document.createElement("a");
+    source.href = item.source;
+    source.target = "_blank";
+    source.rel = "noreferrer";
+    source.textContent = "Fuente";
+
+    top.append(label, stance);
+    card.append(top, text, source);
+    marketBriefGrid.appendChild(card);
   });
 }
 
@@ -1134,4 +1238,5 @@ fillMonthFilter();
 fillWatchlist();
 renderEarningsStocks();
 renderMacroEvents();
+renderMarketBrief();
 render();
